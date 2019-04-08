@@ -1,0 +1,23 @@
+{{ define "main"}}
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-push-4">
+                        {{ .Content }}
+                </div>
+                <div class="col-sm-4 col-sm-pull-8">
+                    <img src="{{ "/img/home1.jpg" | relURL }}" class="thumbnail" alt="" style="margin: 0 auto;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 text-right">
+                    <p>If you have any questions please feel free to <a href="/contact-us/">email or ring us</a>.</p>
+                    <small class="text-muted">NOTE: WE ONLY BOARD VACCINATED CATS. UNFORTUNATELY WE CANNOT BOARD UN-NEUTERED TOMS AGED OVER SEVEN MONTHS OLD.</small>
+                </div>
+                <div class="col-sm-4">
+                    <img src="{{ "/img/home2.jpg" | relURL }}" class="thumbnail" alt="" style="margin: 0 auto;">
+                </div>
+            </div>
+        </div>
+    </section>
+{{ end }}
