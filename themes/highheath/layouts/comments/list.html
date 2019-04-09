@@ -1,0 +1,24 @@
+{{ define "main" }}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>{{ .Title }}</h1>
+                {{ .Content }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {{ range .Pages }}
+                <div class="panel">
+                    <div class="panel-heading"><strong>{{ .Params.author }}</strong></div>
+                    <div class="panel-body">
+                        {{ .Content }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
