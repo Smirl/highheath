@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  dynamic:
+    build: dynamic
+    image: highheath-dynamic
+    ports:
+    - '8080:8080'
+    volumes:
+    - './dynamic:/opt/code'
+  hugo:
+    build: '.'
+    image: highheath-hugo
+    ports:
+    - '8081:80'
+    volumes:
+    - '.:/opt/code'
