@@ -1,0 +1,17 @@
+baseURL: "https://highheathcattery.co.uk/"
+languageCode: "en-us"
+title: "High Heath Farm Cattery"
+theme: "highheath"
+googleAnalytics: ""
+
+disableKinds:
+- taxonomy
+- taxonomyTerm
+
+outputs:
+  page:
+    - HTML
+  home:
+    - HTML
+  section:
+    - HTML
