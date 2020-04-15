@@ -28,11 +28,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="mainnav">
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/accommodation/">Accommodation</a></li>
-                        <li><a href="/prices/">Prices</a></li>
-                        <li><a href="/comment-us/">Comment Us</a></li>
-                        <li><a href="/contact-us/">Contact Us</a></li>
+                        {{ range .Site.Menus.main }}
+                        <li class="{{ if (or ($.IsMenuCurrent `main` .) (eq $.Section (lower .Name))) }}active{{ end }}">
+                          <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+                        </li>
+                        {{ end }}
                     </ul>
                 
                     <ul class="nav navbar-nav navbar-right">

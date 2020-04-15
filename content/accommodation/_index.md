@@ -1,5 +1,8 @@
 ---
 title: "Accommodation"
+menu:
+  main:
+    weight: 2
 ---
 
 State of the art penthouse accommodation of UPVC construction. Each with its own

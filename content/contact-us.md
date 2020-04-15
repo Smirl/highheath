@@ -1,5 +1,8 @@
 ---
 title: Contact Us
+menu:
+  main:
+    weight: 5
 ---
 See our opening hours.
 

@@ -8,10 +8,42 @@
             </div>
         </div>
         <div class="row">
+            <form class="form-horizontal" data-toggle="validator" role="form" action="localhost:8081/contact?debug=true" method="POST">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Write a review</legend>
+                    
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="name">Name</label>  
+                        <div class="col-md-4">
+                            <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+                        </div>
+                    </div>
+                    
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="message">Message</label>
+                        <div class="col-md-4">                     
+                            <textarea class="form-control" id="message" name="message" data-minlength="5" required></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="submit"></label>
+                        <div class="col-md-4">
+                            <button id="submit" name="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="row">
             <div class="col-sm-12">
                 {{ range .Pages }}
                 <div class="panel">
-                    <div class="panel-heading"><strong>{{ .Params.author }}</strong></div>
+                    <div class="panel-heading"><a href="{{ .RelPermalink }}"><strong>{{ .Params.author }}</strong></a></div>
                     <div class="panel-body">
                         {{ .Content }}
                     </div>

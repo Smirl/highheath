@@ -1,6 +1,9 @@
 ---
 title: "Prices"
 markup: "mmark"
+menu:
+  main:
+    weight: 3
 ---
 
 The prices below are per pen per day and are inclusive of arrival and departure days. If cats are collected before 10am on the day of departure there will be no charge for that day. The price is reduced if two or more cats are sharing a pen.
