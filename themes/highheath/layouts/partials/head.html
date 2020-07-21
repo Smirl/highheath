@@ -10,10 +10,9 @@
     <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     {{ $bootstrap := resources.Get "css/bootstrap.min.css" -}}
     {{- $style := resources.Get "css/style.css" -}}
-    {{- $css := slice $bootstrap $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
+    {{- $lightslider := resources.Get "css/lightslider.css" -}}
+    {{- $css := slice $bootstrap $lightslider $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-
-    {{ block "extra_head" . }}{{- end }}
   
     {{- with .Description -}}
     <meta name="description" content="{{ . }}">
