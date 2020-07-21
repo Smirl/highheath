@@ -1,3 +1,9 @@
+---
+title: "Privacy Policy"
+menu:
+  footer:
+    weight: 3
+---
 # Privacy policy
 
 High Heath Farm Cattery is committed to protecting and respecting your private and personal details. Any information we collect will only be used by staff and High Heath Farm Cattery and for the purpose it is intended for; except in special circumstances as detailed below.

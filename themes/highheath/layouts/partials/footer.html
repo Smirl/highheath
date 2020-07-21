@@ -1,9 +1,10 @@
 <footer>
     <div class="container">
-        <div class="row">
+        <div class="row" style="padding-top: 20px;">
             <div class="col-sm-6">
-                <a href="/terms-conditions/">Terms & Conditions</a><br>
-                <a href="/admin/">Login</a>
+                {{ range .Site.Menus.footer }}
+                <a href="{{ .URL }}">{{ .Name }}</a><br>
+                {{ end }}
             </div>
             <div class="col-sm-6" style="padding-top: 10px;">
                 <div style="padding: 6px 0pt 0pt 5px; float: right;" class="smirlwebSmall">

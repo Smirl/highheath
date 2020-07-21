@@ -1,5 +1,8 @@
 ---
 title: "Terms & Conditions"
+menu:
+  footer:
+    weight: 3
 ---
 * All cats must be treated for fleas at least a week before their stay. If fleas are found to be present the management will use Frontline on you cat and a charge will be added to your account.
 * All days booked must be paid for regardless of early collection or late drop off. Before 10am collection must be stated on booking form otherwise the whole day will be charged as the pen will be held.
