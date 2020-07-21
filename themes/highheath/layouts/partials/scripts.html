@@ -1,9 +1,8 @@
 <div id="scripts">
     {{ $jquery := resources.Get "/js/jquery-1.10.2.min.js" -}}
     {{- $bootstrap := resources.Get "/js/bootstrap.min.js" -}}
-    {{- $js := slice $jquery $bootstrap | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
+    {{- $lightslider := resources.Get "js/lightslider.js" -}}
+    {{- $js := slice $jquery $bootstrap $lightslider | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
-
-    {{- block "extra_scripts" . }}{{- end }}
 </div>

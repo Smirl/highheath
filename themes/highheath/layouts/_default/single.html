@@ -8,6 +8,31 @@
                     {{ .Content }}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                {{ with .Resources.ByType "image" }}
+                    <ul id="gallery">
+                    {{ range . }}
+                        <li>
+                            <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="img-responsive center-block">
+                        </li>
+                    {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+            </div>
         </div>
     </section>
+{{ end }}
+
+{{ define "extra_scripts" }}
+{{ with .Resources.ByType "image" }}
+<div id="extra-scripts">
+    <script>
+        $(document).ready(function() {
+            $("#gallery").lightSlider({item: 1, auto: true, pauseOnHover: true, loop: true, autoWidth: true, pause: 3000, speed: 1000});
+        });
+    </script>
+</div>
+{{ end }}
 {{ end }}

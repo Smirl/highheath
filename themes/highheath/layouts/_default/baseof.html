@@ -8,5 +8,6 @@
         </div>
         {{- partial "footer.html" . -}}
         {{- partial "scripts.html" . -}}
+        {{- block "extra_scripts" . }}{{- end }}
     </body>
 </html>
