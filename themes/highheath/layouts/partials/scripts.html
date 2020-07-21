@@ -1,12 +1,9 @@
 <div id="scripts">
-    <script src="{{ "/js/jquery-1.10.2.min.js" | relURL }}"></script>
-    <script src="{{ "/js/bootstrap.min.js" | relURL }}"></script>
+    {{ $jquery := resources.Get "/js/jquery-1.10.2.min.js" -}}
+    {{- $bootstrap := resources.Get "/js/bootstrap.min.js" -}}
+    {{- $js := slice $jquery $bootstrap | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
-    <script src="{{ "/js/main.js" | relURL }}"></script>
-     <!--
-    <script src="{{ "/js/kube.js" | relURL }}" type="text/javascript"></script>
-    <script src="{{ "/js/kube.legenda.js" | relURL }}" type="text/javascript"></script>
-    <script src="{{ "/js/master.js" | relURL }}" type="text/javascript"></script>
-    -->
+
     {{- block "extra_scripts" . }}{{- end }}
 </div>

@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ block "title" . }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
-    <link rel="stylesheet" media="screen" href="{{ "/css/bootstrap.min.css" | relURL }}">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" media="screen" href="{{ "/css/style.css" | relURL }}">
+    {{ $bootstrap := resources.Get "css/bootstrap.min.css" -}}
+    {{- $style := resources.Get "css/style.css" -}}
+    {{- $css := slice $bootstrap $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
     {{ block "extra_head" . }}{{- end }}
   
     {{- with .Description -}}
