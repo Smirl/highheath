@@ -1,6 +1,17 @@
-FROM nginx:1.15.11
-ADD https://github.com/gohugoio/hugo/releases/download/v0.46/hugo_0.46_Linux-64bit.deb /tmp/hugo.deb
-COPY . /opt/code
-RUN dpkg -i /tmp/hugo.deb \
-    && rm /tmp/hugo.deb \
-    && hugo -s /opt/code -d /usr/share/nginx/html  --cleanDestinationDir
+# build hugo
+FROM klakegg/hugo:alpine-onbuild AS hugo
+
+#build stage
+FROM golang:alpine AS builder
+WORKDIR /go/src/app
+COPY . .
+RUN go get -d -v ./...
+RUN go install -v ./...
+RUN go build -o /go/bin/app highheath/quickstart.go
+
+#final stage
+FROM alpine:latest
+COPY --from=hugo /target /public
+COPY --from=builder /go/bin/app /app
+ENTRYPOINT ./app
+EXPOSE 8080

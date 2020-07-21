@@ -1,2 +1,4 @@
 public/
 .env
+credentials.json
+token.json
