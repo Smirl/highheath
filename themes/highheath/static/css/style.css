@@ -70,6 +70,12 @@ textarea{
 	display: none;
 }
 
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 button.close{
 	padding-left: 10px;
 }

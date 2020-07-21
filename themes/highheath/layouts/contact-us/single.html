@@ -1,0 +1,66 @@
+{{ define "main" }}
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>{{ .Title }}</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ .Content }}
+                </div>
+                <div class="col-sm-6">
+                    <form class="form-horizontal" data-toggle="validator" role="form" action="/api/contact" method="POST">
+                        <fieldset>
+                            <!-- Form Name -->
+                            <legend>Contact</legend>
+                            
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="name">Name</label>
+                                <div class="col-md-9">
+                                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+                                </div>
+                            </div>
+                            
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="email">Email</label>
+                                <div class="col-md-9">
+                                    <input id="email" name="email" type="email" placeholder="" class="form-control input-md" required="">
+                                </div>
+                            </div>
+                            
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="message">Message</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="message" name="message" data-minlength="5" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="submit"></label>
+                                <div class="col-md-9">
+                                    <button id="submit" name="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <iframe style="width: 100%;" src="https://maps.google.co.uk/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=High+Heath+Farm+Cattery,+Withy+Hill+Road,+Sutton+Coldfield&amp;aq=0&amp;oq=high&amp;sll=55.941208,-3.205339&amp;sspn=0.163819,0.445976&amp;t=m&amp;ie=UTF8&amp;hq=High+Heath+Farm+Cattery,&amp;hnear=Withy+Hill+Rd,+B75+6HS,+United+Kingdom&amp;ll=52.576037,-1.784999&amp;spn=0.004434,0.016308&amp;z=16&amp;iwloc=&amp;output=embed" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" height="340"></iframe>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>When we are open</h2>
+                    <img src="{{ `/img/times.png` | relURL }}" alt="Openning times" class="img-responsive center-block">
+                </div>
+            </div>
+        </div>
+    </section>
+{{ end }}
