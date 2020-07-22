@@ -91,7 +91,7 @@ func saveToken(path string, token *oauth2.Token) {
 	}
 }
 
-func sendMessage(message *gmail.Message) {
+func SendMessage(message *gmail.Message) {
 	ctx := context.Background()
 	config, token := getToken()
 	srv, err := gmail.NewService(
