@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/go-gomail/gomail"
 	"github.com/matcornic/hermes/v2"
@@ -14,9 +15,10 @@ import (
 var hermesConfig = hermes.Hermes{
 	Theme: new(HighheathTheme),
 	Product: hermes.Product{
-		Name: "High Heath Farm Cattery",
-		Link: "https://highheathcattery.co.uk/",
-		Logo: "http://localhost:8080/img/header_email.png",
+		Name:      "Lyn at High Heath Farm Cattery",
+		Link:      "https://highheathcattery.co.uk/",
+		Copyright: fmt.Sprintf("Copyright © %s High Heath Farm Cattery. All rights reserved.", time.Now().Format("2006")),
+		Logo:      "http://localhost:8080/img/header_email.png",
 	},
 }
 
@@ -36,18 +38,41 @@ func ToTable(message interface{}) hermes.Table {
 	var table hermes.Table
 	value := reflect.ValueOf(message)
 	for i := 0; i < value.NumField(); i++ {
+		fieldName, ok := value.Type().Field(i).Tag.Lookup("name")
+		if !ok {
+			fieldName = value.Type().Field(i).Name
+		}
 		table.Data = append(table.Data, []hermes.Entry{
-			{Key: "Field", Value: value.Type().Field(i).Name},
-			{Key: "Value", Value: fmt.Sprintf("%s", value.Field(i).Interface())},
+			{Key: "Field", Value: fieldName},
+			{Key: "Value", Value: fmt.Sprintf("%v", value.Field(i).Interface())},
 		})
 	}
 	return table
+}
+
+type EmailableMessage interface {
+	GetName() string
+	GetEmailAddress() string
+	GetSubject() string
+	GetEmail() *hermes.Email
 }
 
 type Contact struct {
 	Name    string
 	Email   string
 	Message string
+}
+
+func (contact *Contact) GetName() string {
+	return contact.Name
+}
+
+func (contact *Contact) GetEmailAddress() string {
+	return contact.Email
+}
+
+func (contact *Contact) GetSubject() string {
+	return fmt.Sprintf("Thank you for your message, %s.", contact.Name)
 }
 
 func (contact *Contact) GetEmail() *hermes.Email {
@@ -58,36 +83,49 @@ func (contact *Contact) GetEmail() *hermes.Email {
 				"Thank you for your message. We will get back to you soon.",
 			},
 			Dictionary: ToDict(*contact),
+			Signature:  "Yours",
 		},
 	}
 }
 
 type Booking struct {
-	CatsNames       string
-	CatsAges        int
-	CatsSexs        string
-	CatsMC          string
-	CatsColours     string
-	CatsFood        string
-	ArrivalDate     string
-	TimeOfDayA      string
-	DepartureDate   string
-	TimeOfDayD      string
+	CatsNames       string `name:"Cat Name(s)"`
+	CatsAges        int    `name:"Cat Ages(s)"`
+	CatsSexs        string `name:"Cat Sex(s)"`
+	CatsMC          string `name:"Cat Microchip Number(s)"`
+	CatsColours     string `name:"Cat Colour(s)"`
+	CatsFood        string `name:"Cat Preferred Food"`
+	ArrivalDate     string `name:"Arrival Date"`
+	TimeOfDayA      string `name:"Arrival Time"`
+	DepartureDate   string `name:"Departure Date"`
+	TimeOfDayD      string `name:"Arrival Time"`
 	Name            string
 	Address         string
 	Postcode        string
 	Email           string
 	Number          string
-	EmergencyName   string
-	EmergencyNumber string
-	VetName         string
-	VetNumber       string
-	KnowAllergies   string
-	Meds            string
-	Relevant        string
-	VaccinationDate string
-	Sharing         bool
-	TC              bool
+	EmergencyName   string `name:"Emergency Contact Name"`
+	EmergencyNumber string `name:"Emergency Contact Number"`
+	VetName         string `name:"Vet Name"`
+	VetNumber       string `name:"Vet Number"`
+	KnowAllergies   string `name:"Known Allergies"`
+	Meds            string `name:"Medication Details"`
+	Relevant        string `name:"Other Medical Details"`
+	VaccinationDate string `name:"Vaccination Date"`
+	Sharing         bool   `name:"Cats Sharing"`
+	TC              bool   `name:"Terms & Conditions"`
+}
+
+func (booking *Booking) GetName() string {
+	return booking.Name
+}
+
+func (booking *Booking) GetEmailAddress() string {
+	return booking.Email
+}
+
+func (booking *Booking) GetSubject() string {
+	return "[High Heath Farm Cattery] Booking received"
 }
 
 func (booking *Booking) GetEmail() *hermes.Email {
@@ -95,26 +133,33 @@ func (booking *Booking) GetEmail() *hermes.Email {
 		Body: hermes.Body{
 			Name: booking.Name,
 			Intros: []string{
-				"Thank you for your message. We will get back to you soon.",
+				"Thank you for booking with us. Your message has been received and we will contact you to confirm your booking as soon as we can.",
+				fmt.Sprintf("Please note this is not a confirmation of %v's stay.", booking.CatsNames),
 			},
-			Table: ToTable(*booking),
+			Table:     ToTable(*booking),
+			Signature: "Yours",
 		},
 	}
 }
 
-func SendUserMessage(client *gmail.Service, name, emailAddress, subject string, email *hermes.Email) error {
-	message, err := createMessageFromEmail("High Heath Farm Cattery", "smirlie@googlemail.com", name, emailAddress, subject, email)
+func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
+	company := "High Heath Farm Cattery"
+	companyEmailAddress := "smirlie@googlemail.com"
+
+	name := email.GetName()
+	emailAddress := email.GetEmailAddress()
+	subject := email.GetSubject()
+	hermesEmail := email.GetEmail()
+
+	var message *gmail.Message
+	message, err = createMessageFromEmail(company, companyEmailAddress, name, emailAddress, subject, hermesEmail)
 	if err != nil {
 		return err
 	}
 	if _, err := gmailClient.Users.Messages.Send("me", message).Do(); err != nil {
 		return err
 	}
-	return nil
-}
-
-func SendAdminMessage(client *gmail.Service, name, emailAddress, subject string, email *hermes.Email) error {
-	message, err := createMessageFromEmail(name, emailAddress, "Alex Williams", "smirlie@googlemail.com", subject, email)
+	message, err = createMessageFromEmail(name, emailAddress, company, companyEmailAddress, subject, hermesEmail)
 	if err != nil {
 		return err
 	}

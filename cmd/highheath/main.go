@@ -20,6 +20,7 @@ func main() {
 		ReadHeaderTimeout: 2 * time.Second,
 	}
 
+	handler.HandleFunc("/api/booking", highheath.HandleBookingForm)
 	handler.HandleFunc("/api/contact", highheath.HandleContactForm)
 	handler.Handle("/", http.FileServer(http.Dir("./public")))
 	log.Println("Starting server on 0.0.0.0:8080")

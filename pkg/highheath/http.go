@@ -38,14 +38,30 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send the user a copy
-	if err := SendUserMessage(gmailClient, contact.Name, contact.Email, "Thank you for your message", contact.GetEmail()); err != nil {
+	if err := SendMessages(gmailClient, &contact); err != nil {
 		log.Printf("Error creating message from inputs: %v", err)
 	}
 
-	// Send the the admin a copy
-	if err := SendAdminMessage(gmailClient, contact.Name, contact.Email, "Thank you for your message", contact.GetEmail()); err != nil {
+	http.Redirect(w, r, "/contact-us/", http.StatusFound)
+}
+
+func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
+	if err := r.ParseForm(); err != nil {
+		log.Printf("Unable to parse form: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	var booking Booking
+	if err := decoder.Decode(&booking, r.Form); err != nil {
+		log.Printf("Unable to decode form: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if err := SendMessages(gmailClient, &booking); err != nil {
 		log.Printf("Error creating message from inputs: %v", err)
 	}
-	http.Redirect(w, r, "/contact-us/", http.StatusFound)
+
+	http.Redirect(w, r, "/book-now/", http.StatusFound)
 }
