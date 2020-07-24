@@ -24,6 +24,10 @@ func LogRequest(handler http.Handler) http.Handler {
 	})
 }
 
+func HandleHealth(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		log.Printf("Unable to parse form: %v", err)
