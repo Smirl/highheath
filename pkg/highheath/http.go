@@ -42,7 +42,7 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error creating message from inputs: %v", err)
 	}
 
-	http.Redirect(w, r, "/contact-us/", http.StatusFound)
+	http.Redirect(w, r, "/contact-us/success/", http.StatusFound)
 }
 
 func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
@@ -63,5 +63,5 @@ func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error creating message from inputs: %v", err)
 	}
 
-	http.Redirect(w, r, "/book-now/", http.StatusFound)
+	http.Redirect(w, r, "/book-now/success/", http.StatusFound)
 }

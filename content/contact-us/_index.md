@@ -3,7 +3,6 @@ title: Contact Us
 menu:
   main:
     weight: 5
-type: contact-us
 aliases:
   - /opening-hours/
 ---

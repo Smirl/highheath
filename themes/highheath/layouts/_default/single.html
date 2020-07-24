@@ -1,28 +1,35 @@
 {{ define "main" }}
 <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>{{ .Title }}</h1>
-                    <hr>
-                    {{ .Content }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                {{ with .Resources.ByType "image" }}
-                    <ul id="gallery">
-                    {{ range . }}
-                        <li>
-                            <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="img-responsive center-block">
-                        </li>
-                    {{ end }}
-                    </ul>
-                </div>
-                {{ end }}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>{{ .Title }}</h1>
+                <hr>
+                {{ .Content }}
             </div>
         </div>
-    </section>
+        {{ with .Resources.ByType "image" }}
+        <div class="row">
+            <div class="col-sm-12">
+                <ul id="gallery">
+                {{ range . }}
+                    <li>
+                        <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="img-responsive center-block">
+                    </li>
+                {{ end }}
+                </ul>
+            </div>
+        </div>
+        {{ end }}
+        {{ with $.Param "home_button" }}
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <a href="/" role="button" class="btn btn-lg btn-primary btn-block">Back to the home page</a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
 {{ end }}
 
 {{ define "extra_scripts" }}
