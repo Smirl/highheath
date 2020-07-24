@@ -5,13 +5,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/schema"
+	"google.golang.org/api/gmail/v1"
 )
 
 var decoder *schema.Decoder
+var gmailClient *gmail.Service
 
 func init() {
 	decoder = schema.NewDecoder()
 	decoder.IgnoreUnknownKeys(true)
+	gmailClient = GmailClient()
 }
 
 func LogRequest(handler http.Handler) http.Handler {
@@ -34,10 +37,15 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	message, err := CreateUserMessage(contact.Name, contact.Email, "Thank you for your message", contact.GetEmail())
-	if err != nil {
+
+	// Send the user a copy
+	if err := SendUserMessage(gmailClient, contact.Name, contact.Email, "Thank you for your message", contact.GetEmail()); err != nil {
 		log.Printf("Error creating message from inputs: %v", err)
 	}
-	SendMessage(message)
+
+	// Send the the admin a copy
+	if err := SendAdminMessage(gmailClient, contact.Name, contact.Email, "Thank you for your message", contact.GetEmail()); err != nil {
+		log.Printf("Error creating message from inputs: %v", err)
+	}
 	http.Redirect(w, r, "/contact-us/", http.StatusFound)
 }

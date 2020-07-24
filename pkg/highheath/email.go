@@ -32,7 +32,7 @@ func getToken() (*oauth2.Config, *oauth2.Token) {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
 	// If modifying these scopes, delete your previously saved token.json.
-	config, err := google.ConfigFromJSON(b, gmail.GmailSendScope)
+	config, err := google.ConfigFromJSON(b, gmail.GmailSendScope, gmail.GmailInsertScope)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
@@ -91,7 +91,7 @@ func saveToken(path string, token *oauth2.Token) {
 	}
 }
 
-func SendMessage(message *gmail.Message) {
+func GmailClient() *gmail.Service {
 	ctx := context.Background()
 	config, token := getToken()
 	srv, err := gmail.NewService(
@@ -101,7 +101,5 @@ func SendMessage(message *gmail.Message) {
 	if err != nil {
 		log.Fatalf("Unable to retrieve Gmail client: %v", err)
 	}
-	if _, err := srv.Users.Messages.Send("me", message).Do(); err != nil {
-		log.Fatalf("Unable to send message: %v", err)
-	}
+	return srv
 }

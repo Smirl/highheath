@@ -3,7 +3,6 @@ package highheath
 import (
 	"encoding/base64"
 	"fmt"
-	"log"
 	"reflect"
 	"strings"
 
@@ -22,10 +21,8 @@ var hermesConfig = hermes.Hermes{
 }
 
 func ToDict(message interface{}) []hermes.Entry {
-	log.Println(message)
 	var dict []hermes.Entry
 	value := reflect.ValueOf(message)
-	log.Println(value.NumField())
 	for i := 0; i < value.NumField(); i++ {
 		dict = append(dict, hermes.Entry{
 			Key:   value.Type().Field(i).Name,
@@ -105,12 +102,26 @@ func (booking *Booking) GetEmail() *hermes.Email {
 	}
 }
 
-func CreateUserMessage(name, emailAddress, subject string, email *hermes.Email) (*gmail.Message, error) {
-	return createMessageFromEmail("High Heath Farm Cattery", "smirlie@googlemail.com", name, emailAddress, subject, email)
+func SendUserMessage(client *gmail.Service, name, emailAddress, subject string, email *hermes.Email) error {
+	message, err := createMessageFromEmail("High Heath Farm Cattery", "smirlie@googlemail.com", name, emailAddress, subject, email)
+	if err != nil {
+		return err
+	}
+	if _, err := gmailClient.Users.Messages.Send("me", message).Do(); err != nil {
+		return err
+	}
+	return nil
 }
 
-func CreateAdminMessage(name, emailAddress, subject string, email *hermes.Email) (*gmail.Message, error) {
-	return createMessageFromEmail(name, emailAddress, "High Heath Farm Cattery", "highheath@googlemail.com", subject, email)
+func SendAdminMessage(client *gmail.Service, name, emailAddress, subject string, email *hermes.Email) error {
+	message, err := createMessageFromEmail(name, emailAddress, "Alex Williams", "smirlie@googlemail.com", subject, email)
+	if err != nil {
+		return err
+	}
+	if _, err := gmailClient.Users.Messages.Insert("me", message).Do(); err != nil {
+		return err
+	}
+	return nil
 }
 
 func createMessageFromEmail(from, fromEmail, to, toEmail, subject string, email *hermes.Email) (*gmail.Message, error) {
@@ -129,7 +140,6 @@ func createMessageFromEmail(from, fromEmail, to, toEmail, subject string, email 
 	m.SetAddressHeader("From", fromEmail, from)
 	m.SetAddressHeader("Reply-To", fromEmail, from)
 	m.SetAddressHeader("To", toEmail, to)
-	m.SetAddressHeader("Sender", "smirlie@googlemail.com", "Alex Williams")
 	m.SetHeader("Subject", subject)
 	m.SetBody("text/plain", emailText)
 	m.AddAlternative("text/html", emailBody)
@@ -145,5 +155,6 @@ func createMessageFromEmail(from, fromEmail, to, toEmail, subject string, email 
 
 	var message gmail.Message
 	message.Raw = raw.String()
+	message.LabelIds = []string{"INBOX", "UNREAD"}
 	return &message, nil
 }
