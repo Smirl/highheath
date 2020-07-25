@@ -3,11 +3,15 @@
 _version: 3_
 
 This is the Hugo static site for www.highheathcattery.co.uk. Forms are sent to
-a small Python3.7 aiohttp server, and emails sent with Mailgun.
+a small golang server, and emails sent with Gmail API. Emails are created with
+[hermes](https://github.com/matcornic/hermes/) and form data parsed with
+[schemas](http://www.gorillatoolkit.org/pkg/schema).
 
 ## Getting Started
 
-There is a docker compose file which will start nginx and the python app.
+There is a docker compose file which will start the go app which runs
+the static file server and form actions.
+
 For fast theme development run:
 
     hugo server
@@ -15,6 +19,7 @@ For fast theme development run:
 To test forms you will need:
 
     docker-compose up
+
 
 ## Theme layout
 
