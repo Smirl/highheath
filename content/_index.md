@@ -5,7 +5,9 @@ menu:
   main:
     weight: 1
 ---
-**Welcome to High Heath Farm Cattery**, I hope you will take a few moments to
+### Welcome to High Heath Farm Cattery
+
+I hope you will take a few moments to
 have a look around our website. We understand at High Heath that your cat is
 very much a family member and that it can be stressful for both owner and cat to
 be apart. We pride ourselves on spending time with each cat, giving it lots of

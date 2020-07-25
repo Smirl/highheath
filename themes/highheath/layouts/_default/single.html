@@ -3,8 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>{{ .Title }}</h1>
+                {{ with .Title }}
+                <h1>{{ . }}</h1>
                 <hr>
+                {{ end }}
                 {{ .Content }}
             </div>
         </div>

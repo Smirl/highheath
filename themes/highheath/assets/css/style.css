@@ -9,7 +9,7 @@ body {
 	padding-bottom: 20px;
 	background: url(../img/mainBG1.png) #FCFBE6 no-repeat center top;
 }
-header .container, section .container, footer .container, nav .container {
+header .container, section .container, nav .container {
 	border: 6px solid #3179D2;
 }
 header .container {
@@ -17,14 +17,13 @@ header .container {
 }
 section .container, nav.container {
 	border-top: 0;
-	border-bottom: 0;
 	background: white;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
 footer .container { 
-	border-top: 0;
-	height: 100px;
+	padding-top: 30px;
+	font-size:  smaller;
 }
 
 .navbar {
@@ -48,7 +47,20 @@ nav .border{
 	padding-right: 0;
 }
 
+.top-spacer {
+	margin-top: 20px;
+}
+
 /* OVERRIDES */
+.pagination>li>a,.pagination>li>span {
+	color: white;
+	border: none;
+}
+
+.pagination>li.active>a {
+	color: #d9534f;
+}
+
 .input-group, .controls{ 
       margin-bottom: 10px;
 }

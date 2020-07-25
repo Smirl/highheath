@@ -43,18 +43,29 @@
             </div>
         </div>
         <div class="row">
+            {{ $paginator := .Paginate .Pages 20 }}
             <div class="col-sm-12">
-                {{ range .Pages }}
+                <nav aria-label="Page navigation" class="text-center">
+                    {{ template "_internal/pagination.html" . }}
+                </nav>
+            </div>
+            <div class="col-sm-12">
+                {{ range $paginator.Pages }}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="{{ .RelPermalink }}"><strong>{{ .Params.author }}</strong></a>
-                        <span class="pull-right">{{ .Date.Format "2 January 2006"  }}</span>
+                        <small class="pull-right">{{ .Date.Format "2 January 2006"  }}</small>
                     </div>
                     <div class="panel-body">
                         {{ .Content }}
                     </div>
                 </div>
                 {{ end }}
+            </div>
+            <div class="col-sm-12">
+                <nav aria-label="Page navigation" class="text-center">
+                    {{ template "_internal/pagination.html" . }}
+                </nav>
             </div>
         </div>
     </div>
