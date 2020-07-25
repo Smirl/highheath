@@ -46,7 +46,10 @@
             <div class="col-sm-12">
                 {{ range .Pages }}
                 <div class="panel panel-default">
-                    <div class="panel-heading"><a href="{{ .RelPermalink }}"><strong>{{ .Params.author }}</strong></a></div>
+                    <div class="panel-heading">
+                        <a href="{{ .RelPermalink }}"><strong>{{ .Params.author }}</strong></a>
+                        <span class="pull-right">{{ .Date.Format "2 January 2006"  }}</span>
+                    </div>
                     <div class="panel-body">
                         {{ .Content }}
                     </div>
