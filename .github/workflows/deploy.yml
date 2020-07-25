@@ -8,6 +8,9 @@ on:
   push:
     tags:
       - v*
+  release:
+    types:
+      - published
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -51,4 +54,4 @@ jobs:
         k8s-secret: ${{ secrets.K8S_SECRET }}
 
     - name: Deploy
-      run: helm upgrade --install deploy/chart/ --namespace highheath --set version=$GIT_TAG_NAME --set BaseURL=highheath.smirlwebs.com --set httpPort=8080 highheath
+      run: helm upgrade --install highheath ./deploy/chart/ --namespace highheath --set version=$GIT_TAG_NAME --set BaseURL=highheath.smirlwebs.com --set httpPort=8080
