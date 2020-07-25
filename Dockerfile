@@ -1,5 +1,7 @@
 # build hugo
-FROM klakegg/hugo:alpine-onbuild AS hugo
+FROM klakegg/hugo:0.74.3-alpine AS hugo
+COPY . /src
+RUN hugo --minify --cleanDestinationDir
 
 #build stage
 FROM golang:alpine AS builder
@@ -11,7 +13,7 @@ RUN go build -o /go/bin/app cmd/highheath/main.go
 
 #final stage
 FROM alpine:latest
-COPY --from=hugo /target /public
+COPY --from=hugo /src/public /public
 COPY --from=builder /go/bin/app /app
 ENTRYPOINT ./app
 EXPOSE 8080

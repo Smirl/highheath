@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - image: "registry.smirlwebs.com/smirl/{{ .Release.Name }}:{{ .Values.version }}"
+        imagePullPolicy: Always
+        name: {{ .Release.Name }}
+        ports:
+        - name: http
+          containerPort: {{ .httpPort }}
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: amplify
+              key: api_key
+        - name: AMPLIFY_IMAGENAME
+          value: '{{ .Release.Name }}'
+      imagePullSecrets:
+      - name: registry.smirlwebs.com

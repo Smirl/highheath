@@ -1,0 +1,3 @@
+version: latest
+BaseURL: "example.com"
+httpPort: 80
