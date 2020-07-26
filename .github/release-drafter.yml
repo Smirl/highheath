@@ -8,6 +8,9 @@ categories:
     labels:
       - 'documentation'
       - 'bug'
+  - title: '💬 Comments & Reviews'
+    labels:
+      - 'comment'
 version-resolver:
   major:
     labels:
