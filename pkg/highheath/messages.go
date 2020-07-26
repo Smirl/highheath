@@ -18,7 +18,7 @@ var hermesConfig = hermes.Hermes{
 		Name:      "Lyn at High Heath Farm Cattery",
 		Link:      "https://highheathcattery.co.uk/",
 		Copyright: fmt.Sprintf("Copyright © %s High Heath Farm Cattery. All rights reserved.", time.Now().Format("2006")),
-		Logo:      "http://localhost:8080/img/header_email.png",
+		Logo:      "https://highheath.smirlwebs.com/img/header_email.png",
 	},
 }
 
