@@ -97,5 +97,5 @@ func HandleCommentForm(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error sending comment messages: %v", err)
 	}
 
-	http.Redirect(w, r, "/comment-us/", http.StatusFound)
+	http.Redirect(w, r, "/comments/success/", http.StatusFound)
 }
