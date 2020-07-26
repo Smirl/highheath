@@ -26,13 +26,18 @@ spec:
         ports:
         - name: http
           containerPort: {{ .Values.httpPort }}
-        env:
-        - name: API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: amplify
-              key: api_key
-        - name: AMPLIFY_IMAGENAME
-          value: '{{ .Release.Name }}'
+        volumeMounts:
+        - mountPath: /credentials.json
+          subPath: credentials.json
+          name: gmail
+          readOnly: true
+        - mountPath: /token.json
+          subPath: token.json
+          name: gmail
+          readOnly: true
       imagePullSecrets:
       - name: registry.smirlwebs.com
+      volumes:
+      - name: gmail
+        secret:
+          secretName: gmail
