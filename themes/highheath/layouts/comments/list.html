@@ -15,31 +15,27 @@
                 <form class="form-horizontal" data-toggle="validator" role="form" action="/api/comment" method="POST">
                 <fieldset>
                     <legend>Write a review</legend>
-                    <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="name">Name</label>  
                         <div class="col-md-9">
-                            <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+                            <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="true">
                         </div>
                     </div>
 
-                    <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="email">Email</label>
                         <div class="col-md-9">
-                            <input id="email" name="email" type="email" placeholder="" class="form-control input-md" required="">
+                            <input id="email" name="email" type="email" placeholder="" class="form-control input-md" required="true">
                         </div>
                     </div>
 
-                    <!-- Textarea -->
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="message">Message</label>
                         <div class="col-md-9">                     
-                            <textarea class="form-control" id="message" name="message" data-minlength="5" rows="5" required></textarea>
+                            <textarea class="form-control" id="message" name="message" data-minlength="5" rows="5" required="true"></textarea>
                         </div>
                     </div>
                     
-                    <!-- Button -->
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="submit"></label>
                         <div class="col-md-9">
