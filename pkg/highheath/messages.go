@@ -1,10 +1,13 @@
 package highheath
 
 import (
+	"bytes"
 	"encoding/base64"
 	"fmt"
+	"log"
 	"reflect"
 	"strings"
+	"text/template"
 	"time"
 
 	"github.com/go-gomail/gomail"
@@ -21,6 +24,10 @@ var hermesConfig = hermes.Hermes{
 		Logo:      "https://highheath.smirlwebs.com/img/header_email.png",
 	},
 }
+
+var commentTemplate = template.Must(
+	template.New("comment").Parse("---\nauthor: {{ .Name }}\ndate: {{ .Date.Format `2006-01-02 15:04:05` }}\n---\n{{ .Message }}\n"),
+)
 
 func ToDict(message interface{}) []hermes.Entry {
 	var dict []hermes.Entry
@@ -86,6 +93,33 @@ func (contact *Contact) GetEmail() *hermes.Email {
 			Signature:  "Yours",
 		},
 	}
+}
+
+type Comment struct {
+	Contact
+	Date time.Time
+}
+
+func (comment *Comment) GetEmail() *hermes.Email {
+	return &hermes.Email{
+		Body: hermes.Body{
+			Name: comment.Name,
+			Intros: []string{
+				"Thank you for your review!",
+				"It will be visible on the website shortly.",
+			},
+			Dictionary: ToDict(*comment),
+			Signature:  "Yours",
+		},
+	}
+}
+
+func (comment *Comment) GetFileContent() []byte {
+	var b bytes.Buffer
+	if err := commentTemplate.Execute(&b, comment); err != nil {
+		log.Fatalf("Error getting comment file content: %v", err)
+	}
+	return b.Bytes()
 }
 
 type Booking struct {
