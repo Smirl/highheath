@@ -3,18 +3,22 @@ package highheath
 import (
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/google/go-github/v32/github"
 	"github.com/gorilla/schema"
 	"google.golang.org/api/gmail/v1"
 )
 
 var decoder *schema.Decoder
 var gmailClient *gmail.Service
+var githubClient *github.Client
 
 func init() {
 	decoder = schema.NewDecoder()
 	decoder.IgnoreUnknownKeys(true)
 	gmailClient = GmailClient()
+	githubClient = GithubClient()
 }
 
 func LogRequest(handler http.Handler) http.Handler {
@@ -43,7 +47,7 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := SendMessages(gmailClient, &contact); err != nil {
-		log.Printf("Error creating message from inputs: %v", err)
+		log.Printf("Error sending contact message: %v", err)
 	}
 
 	http.Redirect(w, r, "/contact-us/success/", http.StatusFound)
@@ -64,8 +68,34 @@ func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := SendMessages(gmailClient, &booking); err != nil {
-		log.Printf("Error creating message from inputs: %v", err)
+		log.Printf("Error sending booking message: %v", err)
 	}
 
 	http.Redirect(w, r, "/book-now/success/", http.StatusFound)
+}
+
+func HandleCommentForm(w http.ResponseWriter, r *http.Request) {
+	if err := r.ParseForm(); err != nil {
+		log.Printf("Unable to parse form: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	var comment Comment
+	if err := decoder.Decode(&comment, r.Form); err != nil {
+		log.Printf("Unable to decode form: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	comment.Date = time.Now()
+
+	if err := CreateComment(r.Context(), githubClient, &comment); err != nil {
+		log.Printf("Error creating comment pull request: %v", err)
+	}
+
+	if err := SendMessages(gmailClient, &comment); err != nil {
+		log.Printf("Error sending comment messages: %v", err)
+	}
+
+	http.Redirect(w, r, "/comment-us/", http.StatusFound)
 }
