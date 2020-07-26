@@ -60,10 +60,12 @@
             <div class="col-sm-12">
                 {{ range $paginator.Pages }}
                 <div class="panel panel-default">
+                    {{ if .Date }}
                     <div class="panel-heading">
                         <a href="{{ .RelPermalink }}"><strong>{{ .Params.author }}</strong></a>
                         <small class="pull-right">{{ .Date.Format "2 January 2006"  }}</small>
                     </div>
+                    {{ end }}
                     <div class="panel-body">
                         {{ .Content }}
                     </div>

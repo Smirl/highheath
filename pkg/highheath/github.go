@@ -12,7 +12,7 @@ import (
 
 func GithubClient() *github.Client {
 	// Wrap the shared transport for use with the integration ID 1 authenticating with installation ID 99.
-	itr, err := ghinstallation.NewKeyFromFile(http.DefaultTransport, 74377, 10821586, "high-heath-farm-cattery.2020-07-26.private-key.pem")
+	itr, err := ghinstallation.NewKeyFromFile(http.DefaultTransport, 74377, 10821586, "private-key.pem")
 	if err != nil {
 		log.Fatalf("Failed to create github client: %v", err)
 	}
