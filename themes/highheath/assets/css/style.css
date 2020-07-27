@@ -91,6 +91,13 @@ textarea{
 button.close{
 	padding-left: 10px;
 }
+
+input[type=checkbox]
+{
+	width: 20px;
+	height: 20px;
+}
+
 /* SMIRLWEBS LOGO */
 .smirlwebLarge, .smirlwebLarge a {
 	font-family: 'Times New Roman', times-roman, georgia, serif;
