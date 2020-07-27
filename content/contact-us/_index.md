@@ -6,7 +6,7 @@ menu:
 aliases:
   - /opening-hours/
 ---
-_See our opening hours below._
+_See our [opening hours](#opening-times) below._
 
 If you would like a visit you will need to book an appointment.
 - To do this ring us on 0121 378 0998

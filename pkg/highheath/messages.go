@@ -123,12 +123,14 @@ func (comment *Comment) GetFileContent() []byte {
 }
 
 type Booking struct {
+	Pens            int    `name:"Number of pens"`
 	CatsNames       string `name:"Cat Name(s)"`
 	CatsAges        int    `name:"Cat Ages(s)"`
 	CatsSexs        string `name:"Cat Sex(s)"`
 	CatsMC          string `name:"Cat Microchip Number(s)"`
 	CatsColours     string `name:"Cat Colour(s)"`
 	CatsFood        string `name:"Cat Preferred Food"`
+	Insured         bool
 	ArrivalDate     string `name:"Arrival Date"`
 	TimeOfDayA      string `name:"Arrival Time"`
 	DepartureDate   string `name:"Departure Date"`
@@ -146,7 +148,8 @@ type Booking struct {
 	Meds            string `name:"Medication Details"`
 	Relevant        string `name:"Other Medical Details"`
 	VaccinationDate string `name:"Vaccination Date"`
-	Sharing         bool   `name:"Cats Sharing"`
+	FleaDate        string `name:"Flea Treatment Date"`
+	WormingDate     string `name:"Worming Date"`
 	TC              bool   `name:"Terms & Conditions"`
 }
 
