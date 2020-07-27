@@ -78,10 +78,6 @@ textarea{
     display: none;
 }
 
-.help-block {
-	display: none;
-}
-
 .center-block {
 	display: block;
 	margin-left: auto;
@@ -96,6 +92,11 @@ input[type=checkbox]
 {
 	width: 20px;
 	height: 20px;
+}
+
+label span {
+	font-size: smaller;
+	color: #999999;
 }
 
 /* SMIRLWEBS LOGO */

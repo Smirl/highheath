@@ -64,7 +64,9 @@
                         <div class="form-group">
                             <label class="col-md-4">Are your Cat(s) insured?</label>
                             <div class="col-md-8 Insured">
-                                <input type="checkbox" name="Insured" value="">
+                                <div class="checkbox">
+                                    <input type="checkbox" name="Insured" value="">
+                                </div>
                             </div>
                         </div>
                         
@@ -196,7 +198,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4">Date of Last Vaccination </label>
+                            <label class="col-md-4">Date of Last Vaccination   <span>(required)</span> </label>
                             <div class="col-md-8 VaccinationDate">
                                 <div class='input-group date' id='VaccinationDate'>
                                     <input type='text' name="VaccinationDate" class="form-control" required="true" />
@@ -207,7 +209,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4">Date of Last Flea Treatment </label>
+                            <label class="col-md-4">Date of Last Flea Treatment   <span>(required)</span> </label>
                             <div class="col-md-8 FleaDate">
                                 <div class='input-group date' id='FleaDate'>
                                     <input type='text' name="FleaDate" class="form-control" required="true" />
@@ -218,7 +220,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4">Date of Last Worming </label>
+                            <label class="col-md-4">Date of Last Worming   <span>(required)</span> </label>
                             <div class="col-md-8 WormingDate">
                                 <div class='input-group date' id='WormingDate'>
                                     <input type='text' name="WormingDate" class="form-control" required="true" />
@@ -235,9 +237,10 @@
                         <div class="form-group">
                             <label class="col-md-8">I have read and agree to <strong><a href="terms-conditions" target="blank">terms and conditions</a></strong> and <strong><a href="privacy-policy" target="blank">privacy policy</a></strong></label>
                             <div class="col-md-4 TC">
-                                <span class="checkbox">
-                                    <input type="checkbox" name="TC" value="1">
-                                </span>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="TC" value="1" required data-error="You must agree to the terms & conditions.">
+                                </div>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         
@@ -258,21 +261,21 @@
 {{ define "extra_scripts" }}
 <script type="text/javascript">
     $(function () {
-        $('#ArrivalDate').datetimepicker({allowInputToggle: true, format: 'L'});
+        $('#ArrivalDate').datetimepicker({allowInputToggle: true, minDate: moment(), format: 'DD/MM/YYYY'});
         $('#ArrivalDate').on("dp.change", function (e) {
             $('#DepartureDate').data("DateTimePicker").minDate(e.date);
         });
-        $('#TimeOfDayA').datetimepicker({allowInputToggle: true, format: 'LT', stepping: 15});
+        $('#TimeOfDayA').datetimepicker({allowInputToggle: true, format: 'HH:mm', stepping: 15});
 
-        $('#DepartureDate').datetimepicker({allowInputToggle: true, format: 'L', useCurrent: false});
+        $('#DepartureDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', useCurrent: false});
         $('#DepartureDate').on("dp.change", function (e) {
             $('#ArrivalDate').data("DateTimePicker").maxDate(e.date);
         });
-        $('#TimeOfDayD').datetimepicker({allowInputToggle: true, format: 'LT', stepping: 15});
+        $('#TimeOfDayD').datetimepicker({allowInputToggle: true, format: 'HH:mm', stepping: 15});
 
-        $('#VaccinationDate').datetimepicker({allowInputToggle: true, format: 'L', viewMode: 'years'});
-        $('#FleaDate').datetimepicker({allowInputToggle: true, format: 'L', viewMode: 'years'});
-        $('#WormingDate').datetimepicker({allowInputToggle: true, format: 'L', viewMode: 'years'});
+        $('#VaccinationDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
+        $('#FleaDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
+        $('#WormingDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
     });
 </script>
 {{ end }}
