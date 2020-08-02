@@ -14,3 +14,5 @@ be apart. We pride ourselves on spending time with each cat, giving it lots of
 love and playing with boisterous cats making sure they feel at home during their
 stay. Everything is provided for your cat during their stay but it is nice for
 your cat to have something familiar from home to help them settle.
+
+If you have any questions please feel free to [email or ring us](/contact-us/).
