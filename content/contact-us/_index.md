@@ -15,8 +15,8 @@ If you would like a visit you will need to book an appointment.
 To book, go to the [booking page](/book-now/). Please print and fill out these
 forms and bring them with you or send them to the address below.
 
-- [Vet Authorization Form](/Vet-Authorisation.pdf)
-- [Current Information Form](/Current-information-forms.pdf)
+- [Vet Authorization Form](/VeterinaryConsent.pdf)
+- [Current Information Form](/CurrentInformation.pdf)
 
 **High Heath Farm Cattery**  
 Withy Hill Road  
