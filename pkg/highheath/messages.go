@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"log"
+	"os"
 	"reflect"
 	"strings"
 	"text/template"
@@ -181,7 +182,10 @@ func (booking *Booking) GetEmail() *hermes.Email {
 
 func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
 	company := "High Heath Farm Cattery"
-	companyEmailAddress := "smirlie@googlemail.com"
+	companyEmailAddress := "highheath@googlemail.com"
+	if os.Getenv("TOKEN_FILE") != "token.json" {
+		companyEmailAddress = "smirlie@googlemail.com"
+	}
 
 	name := email.GetName()
 	emailAddress := email.GetEmailAddress()

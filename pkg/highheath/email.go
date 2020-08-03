@@ -40,10 +40,16 @@ func getToken() (*oauth2.Config, *oauth2.Token) {
 	// created automatically when the authorization flow completes for the first
 	// time.
 	tokFile := "token.json"
+	if tf, ok := os.LookupEnv("TOKEN_FILE"); ok {
+		tokFile = tf
+	}
 	token, err := tokenFromFile(tokFile)
 	if err != nil {
+		log.Printf("Cannot find token in %s", tokFile)
 		token = getTokenFromWeb(config)
 		saveToken(tokFile, token)
+	} else {
+		log.Printf("Using token found in %s", tokFile)
 	}
 	return config, token
 }
