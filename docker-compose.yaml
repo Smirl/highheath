@@ -7,4 +7,7 @@ services:
       - "8080:8080"
     volumes:
       - ./credentials.json:/credentials.json
-      - ./token.json:/token.json
+      - ./token.dev.json:/token.dev.json
+      - ./private-key.pem:/private-key.pem
+    environment:
+      TOKEN_FILE: /token.dev.json
