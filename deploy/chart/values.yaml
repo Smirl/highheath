@@ -1,3 +1,6 @@
 version: latest
-BaseURL: "example.com"
-httpPort: 80
+httpPort: 8080
+hosts:
+- highheath.smirlwebs.com
+- highheathcattery.co.uk
+- www.highheathcattery.co.uk

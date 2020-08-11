@@ -11,21 +11,17 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ .Values.BaseURL }}
-    - www.{{ .Values.BaseURL }}
+    {{- range .Values.hosts }}
+    - {{ . }}
+    {{- end }}
     secretName: {{ .Release.Name }}-tls
   rules:
-  - host: {{ .Values.BaseURL }}
+  {{- range .Values.hosts }}
+  - host: {{ . }}
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{ .Release.Name }}
+          serviceName: {{ $.Release.Name }}
           servicePort: 80
-  - host: www.{{ .Values.BaseURL }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ .Release.Name }}
-          servicePort: 80
+  {{- end }}
