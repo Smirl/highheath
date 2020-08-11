@@ -32,12 +32,9 @@ var commentTemplate = template.Must(
 
 func ToDict(message interface{}) []hermes.Entry {
 	var dict []hermes.Entry
-	value := reflect.ValueOf(message)
-	for i := 0; i < value.NumField(); i++ {
-		dict = append(dict, hermes.Entry{
-			Key:   value.Type().Field(i).Name,
-			Value: fmt.Sprintf("%s", value.Field(i).Interface()),
-		})
+	for _, row := range ToTable(message).Data {
+		field, value := row[0], row[1]
+		dict = append(dict, hermes.Entry{Key: field.Value, Value: value.Value})
 	}
 	return dict
 }
@@ -46,14 +43,21 @@ func ToTable(message interface{}) hermes.Table {
 	var table hermes.Table
 	value := reflect.ValueOf(message)
 	for i := 0; i < value.NumField(); i++ {
-		fieldName, ok := value.Type().Field(i).Tag.Lookup("name")
-		if !ok {
-			fieldName = value.Type().Field(i).Name
+		field := value.Field(i)
+		fieldType := value.Type().Field(i)
+
+		if field.Kind() == reflect.Struct && fieldType.Anonymous {
+			table.Data = append(table.Data, ToTable(field.Interface()).Data...)
+		} else {
+			fieldName, ok := fieldType.Tag.Lookup("name")
+			if !ok {
+				fieldName = fieldType.Name
+			}
+			table.Data = append(table.Data, []hermes.Entry{
+				{Key: "Field", Value: fieldName},
+				{Key: "Value", Value: fmt.Sprintf("%v", field.Interface())},
+			})
 		}
-		table.Data = append(table.Data, []hermes.Entry{
-			{Key: "Field", Value: fieldName},
-			{Key: "Value", Value: fmt.Sprintf("%v", value.Field(i).Interface())},
-		})
 	}
 	return table
 }
