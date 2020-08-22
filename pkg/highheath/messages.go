@@ -130,7 +130,7 @@ func (comment *Comment) GetFileContent() []byte {
 type Booking struct {
 	Pens            int    `name:"Number of pens"`
 	CatsNames       string `name:"Cat Name(s)"`
-	CatsAges        int    `name:"Cat Ages(s)"`
+	CatsAges        string `name:"Cat Ages(s)"`
 	CatsSexs        string `name:"Cat Sex(s)"`
 	CatsMC          string `name:"Cat Microchip Number(s)"`
 	CatsColours     string `name:"Cat Colour(s)"`
