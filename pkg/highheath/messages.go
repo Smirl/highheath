@@ -3,6 +3,7 @@ package highheath
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -212,6 +213,14 @@ func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
 		return err
 	}
 	return nil
+}
+
+func HandleSendMessagesError(email EmailableMessage) {
+	output, err := json.Marshal(email)
+	if err != nil {
+		log.Printf("Error in HandleSendMessagesError: %v", err)
+	}
+	log.Println(string(output))
 }
 
 func createMessageFromEmail(from, fromEmail, to, toEmail, subject string, email *hermes.Email) (*gmail.Message, error) {
