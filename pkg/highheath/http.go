@@ -47,6 +47,7 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := SendMessages(gmailClient, &contact); err != nil {
+		HandleSendMessagesError(&contact)
 		log.Printf("Error sending contact message: %v", err)
 	}
 
@@ -68,6 +69,7 @@ func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := SendMessages(gmailClient, &booking); err != nil {
+		HandleSendMessagesError(&booking)
 		log.Printf("Error sending booking message: %v", err)
 	}
 
@@ -94,6 +96,7 @@ func HandleCommentForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := SendMessages(gmailClient, &comment); err != nil {
+		HandleSendMessagesError(&comment)
 		log.Printf("Error sending comment messages: %v", err)
 	}
 
