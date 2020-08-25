@@ -46,9 +46,14 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if err := ValidateForm(&contact); err != nil {
+		HandleFormError(w, r, &contact, err, "/contact-us/failure/")
+		return
+	}
+
 	if err := SendMessages(gmailClient, &contact); err != nil {
-		HandleSendMessagesError(&contact)
-		log.Printf("Error sending contact message: %v", err)
+		HandleFormError(w, r, &contact, err, "/contact-us/failure/")
+		return
 	}
 
 	http.Redirect(w, r, "/contact-us/success/", http.StatusFound)
@@ -68,9 +73,14 @@ func HandleBookingForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if err := ValidateForm(&booking); err != nil {
+		HandleFormError(w, r, &booking, err, "/book-now/failure/")
+		return
+	}
+
 	if err := SendMessages(gmailClient, &booking); err != nil {
-		HandleSendMessagesError(&booking)
-		log.Printf("Error sending booking message: %v", err)
+		HandleFormError(w, r, &booking, err, "/book-now/failure/")
+		return
 	}
 
 	http.Redirect(w, r, "/book-now/success/", http.StatusFound)
@@ -91,13 +101,20 @@ func HandleCommentForm(w http.ResponseWriter, r *http.Request) {
 	}
 	comment.Date = time.Now()
 
+	if err := ValidateForm(&comment); err != nil {
+		HandleFormError(w, r, &comment, err, "/comments/failure/")
+		return
+	}
+
 	if err := CreateComment(r.Context(), githubClient, &comment); err != nil {
 		log.Printf("Error creating comment pull request: %v", err)
+		HandleFormError(w, r, &comment, err, "/comments/failure/")
+		return
 	}
 
 	if err := SendMessages(gmailClient, &comment); err != nil {
-		HandleSendMessagesError(&comment)
-		log.Printf("Error sending comment messages: %v", err)
+		HandleFormError(w, r, &comment, err, "/comments/failure/")
+		return
 	}
 
 	http.Redirect(w, r, "/comments/success/", http.StatusFound)

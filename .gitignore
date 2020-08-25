@@ -4,3 +4,4 @@ credentials.json
 token.json
 token.dev.json
 *.pem
+recaptcha.json
