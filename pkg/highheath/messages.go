@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"reflect"
 	"strings"
@@ -54,6 +55,9 @@ func ToTable(message interface{}) hermes.Table {
 			if !ok {
 				fieldName = fieldType.Name
 			}
+			if fieldType.Tag.Get("omit") != "" {
+				continue
+			}
 			table.Data = append(table.Data, []hermes.Entry{
 				{Key: "Field", Value: fieldName},
 				{Key: "Value", Value: fmt.Sprintf("%v", field.Interface())},
@@ -66,14 +70,18 @@ func ToTable(message interface{}) hermes.Table {
 type EmailableMessage interface {
 	GetName() string
 	GetEmailAddress() string
+	GetEmailCheck() string
 	GetSubject() string
 	GetEmail() *hermes.Email
+	GetToken() string
 }
 
 type Contact struct {
-	Name    string
-	Email   string
-	Message string
+	Name       string
+	Email      string
+	EmailCheck string `omit:"true"`
+	Message    string
+	Token      string `omit:"true"`
 }
 
 func (contact *Contact) GetName() string {
@@ -84,8 +92,16 @@ func (contact *Contact) GetEmailAddress() string {
 	return contact.Email
 }
 
+func (contact *Contact) GetEmailCheck() string {
+	return contact.EmailCheck
+}
+
 func (contact *Contact) GetSubject() string {
 	return fmt.Sprintf("Thank you for your message, %s.", contact.Name)
+}
+
+func (contact *Contact) GetToken() string {
+	return contact.Token
 }
 
 func (contact *Contact) GetEmail() *hermes.Email {
@@ -145,6 +161,7 @@ type Booking struct {
 	Address         string
 	Postcode        string
 	Email           string
+	EmailCheck      string `omit:"true"`
 	Number          string
 	EmergencyName   string `name:"Emergency Contact Name"`
 	EmergencyNumber string `name:"Emergency Contact Number"`
@@ -157,6 +174,7 @@ type Booking struct {
 	FleaDate        string `name:"Flea Treatment Date"`
 	WormingDate     string `name:"Worming Date"`
 	TC              bool   `name:"Terms & Conditions"`
+	Token           string `omit:"true"`
 }
 
 func (booking *Booking) GetName() string {
@@ -167,8 +185,16 @@ func (booking *Booking) GetEmailAddress() string {
 	return booking.Email
 }
 
+func (booking *Booking) GetEmailCheck() string {
+	return booking.EmailCheck
+}
+
 func (booking *Booking) GetSubject() string {
 	return "[High Heath Farm Cattery] Booking received"
+}
+
+func (booking *Booking) GetToken() string {
+	return booking.Token
 }
 
 func (booking *Booking) GetEmail() *hermes.Email {
@@ -183,6 +209,18 @@ func (booking *Booking) GetEmail() *hermes.Email {
 			Signature: "Yours",
 		},
 	}
+}
+
+func ValidateForm(email EmailableMessage) error {
+	if email.GetEmailCheck() != "" {
+		return fmt.Errorf("Bot Suspected from email check")
+	}
+	if ok, err := VerifyToken(email.GetToken()); err != nil {
+		return err
+	} else if !ok {
+		return fmt.Errorf("Bot Suspected from token")
+	}
+	return nil
 }
 
 func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
@@ -215,12 +253,15 @@ func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
 	return nil
 }
 
-func HandleSendMessagesError(email EmailableMessage) {
+func HandleFormError(w http.ResponseWriter, r *http.Request, email EmailableMessage, e error, redirectURL string) {
 	output, err := json.Marshal(email)
 	if err != nil {
 		log.Printf("Error in HandleSendMessagesError: %v", err)
+	} else {
+		log.Println(string(output))
 	}
-	log.Println(string(output))
+	log.Printf("Error sending %T message: %v", email, e)
+	http.Redirect(w, r, redirectURL, http.StatusFound)
 }
 
 func createMessageFromEmail(from, fromEmail, to, toEmail, subject string, email *hermes.Email) (*gmail.Message, error) {

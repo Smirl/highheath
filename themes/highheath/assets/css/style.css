@@ -52,6 +52,9 @@ nav .border{
 }
 
 /* OVERRIDES */
+
+.grecaptcha-badge { visibility: hidden; }
+
 .pagination>li>a,.pagination>li>span {
 	color: white;
 	border: none;

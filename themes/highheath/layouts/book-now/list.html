@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="form-horizontal" data-toggle="validator" role="form" action="/api/booking" method="POST">
+                    <form class="form-horizontal" id="booking-form" role="form" action="/api/booking" method="POST">
                         
                         <legend> Cat's Details </legend>
                         <div class="form-group">
@@ -141,6 +141,12 @@
                                 <input type="email" name="Email" value="" class="form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" required="true">
                             </div>
                         </div>
+                        <div class="form-group hidden">
+                            <label class="col-md-4">Email Confirmation <span>(required)</span> </label>
+                            <div class="col-md-8 Email">
+                                <input type="email" name="EmailCheck" value="" class="form-control">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-4">Contact Number <span>(required)</span> </label>
                             <div class="col-md-8 Number">
@@ -244,11 +250,12 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+                        <input type="hidden" id="Token" name="Token">
                         
                         <!-- Button -->
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="submit" name="submit" class="btn btn-primary btn-block">Send</button>
+                                <button id="submitBtn" name="submitBtn" class="btn btn-primary btn-block">Send</button>
                             </div>
                         </div>
                     </form>
@@ -277,6 +284,17 @@
         $('#VaccinationDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
         $('#FleaDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
         $('#WormingDate').datetimepicker({allowInputToggle: true, format: 'DD/MM/YYYY', viewMode: 'years'});
+    });
+    $('#booking-form').validator().on('submit', function (e) {
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LduNcIZAAAAAMDI8V6EwSAEXz1lMOAQUn6OO_pT', {action: 'submit'}).then(function(token) {
+                    $("#Token").val(token);
+                    document.getElementById("booking-form").submit();
+                });
+            });
+        }
     });
 </script>
 {{ end }}
