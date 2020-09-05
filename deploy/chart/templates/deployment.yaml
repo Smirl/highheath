@@ -26,6 +26,12 @@ spec:
         ports:
         - name: http
           containerPort: {{ .Values.httpPort }}
+        env:
+        - name: "RECAPTCHA_SECRET"
+          valueFrom:
+            secretKeyRef:
+              name: recaptcha
+              key: secret
         volumeMounts:
         - mountPath: /credentials.json
           subPath: credentials.json
