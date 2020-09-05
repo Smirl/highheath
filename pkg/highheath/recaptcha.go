@@ -8,22 +8,22 @@ import (
 	"os"
 )
 
-var RECAPTURE_URL = "https://www.google.com/recaptcha/api/siteverify"
-var RECAPTURE_SECRET string
+var RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"
+var RECAPTCHA_SECRET string
 
 func init() {
-	if secret, ok := os.LookupEnv("RECAPTURE_SECRET"); ok {
-		RECAPTURE_SECRET = secret
+	if secret, ok := os.LookupEnv("RECAPTCHA_SECRET"); ok {
+		RECAPTCHA_SECRET = secret
 	} else {
-		log.Fatal("Unable to read RECAPTURE_SECRET")
+		log.Fatal("Unable to read RECAPTCHA_SECRET")
 	}
 }
 
 func VerifyToken(token string) (success bool, err error) {
 	values := url.Values{}
-	values.Set("secret", RECAPTURE_SECRET)
+	values.Set("secret", RECAPTCHA_SECRET)
 	values.Set("response", token)
-	resp, err := http.PostForm(RECAPTURE_URL, values)
+	resp, err := http.PostForm(RECAPTCHA_URL, values)
 	if err != nil {
 		return false, err
 	}

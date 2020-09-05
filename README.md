@@ -84,6 +84,21 @@ cluster should be created:
 kubectl create secret generic github -n highheath --from-file=private-key.pem
 ```
 
+### Recaptcha Setup
+
+Recaptcha V3 is used to protect the site. The users browser makes a request
+before each form and a token is added to the form. This token is then checked
+against the recaptcha API with a client secret. This secret needs to be created
+with:
+
+```console
+kubectl create secret generic recaptcha --from-literal=secret=<SECRET>
+```
+
+The [recaptcha admin console][recaptcha] can be used to see the number of
+requests and suspicious requests to the forms.
+
 [github-actions-secrets]: https://github.com/Smirl/highheath/settings/secrets
 [gmail-console]: https://console.developers.google.com/apis/dashboard?project=website-form-bac-1595189229489&folder=&organizationId=
 [github-console]: https://github.com/settings/apps/high-heath-farm-cattery
+[recaptcha]: https://www.google.com/recaptcha/admin/site/432158062
