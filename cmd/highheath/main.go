@@ -3,15 +3,19 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"time"
+
+	"github.com/gorilla/handlers"
 
 	"github.com/smirl/highheath/pkg/highheath"
 )
 
 func main() {
 	handler := http.NewServeMux()
+	wrappedHandler := handlers.RecoveryHandler()(handlers.CombinedLoggingHandler(os.Stdout, handler))
 	server := &http.Server{
-		Handler: highheath.LogRequest(handler),
+		Handler: wrappedHandler,
 		Addr:    "0.0.0.0:8080",
 		// Good practice: enforce timeouts
 		WriteTimeout:      15 * time.Second,

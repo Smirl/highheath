@@ -6,6 +6,7 @@ require (
 	github.com/bradleyfalzon/ghinstallation v1.1.1
 	github.com/go-gomail/gomail v0.0.0-20160411212932-81ebce5c23df
 	github.com/google/go-github/v32 v32.1.0
+	github.com/gorilla/handlers v1.5.0
 	github.com/gorilla/schema v1.1.0
 	github.com/matcornic/hermes/v2 v2.1.0
 	golang.org/x/net v0.0.0-20200707034311-ab3426394381
