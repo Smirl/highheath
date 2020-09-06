@@ -32,7 +32,7 @@
     <!-- Site verification -->
     {{ if .IsHome }} {{ partial "site-verification" . }} {{ end }}
     <!-- add googleAnalytics in config.toml -->
-    {{ template "_internal/google_analytics_async.html" . }}
+    {{ partial "gtag" . }}
   
     <link rel="canonical" href="{{ .Permalink }}">
     {{ if (isset .Params "prev") }}<link rel="prev" href="{{ .Params.prev }}">{{ end }}
