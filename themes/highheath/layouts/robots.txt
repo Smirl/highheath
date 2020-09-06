@@ -1,0 +1,7 @@
+User-agent: *
+
+{{range where .Pages "Section" "comments" }}
+Disallow: {{.RelPermalink}}
+{{- end}}
+
+Sitemap: {{ .Site.BaseURL }}sitemap.xml

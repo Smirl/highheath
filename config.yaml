@@ -3,6 +3,7 @@ languageCode: "en-us"
 title: "High Heath Farm Cattery"
 theme: "highheath"
 googleAnalytics: "UA-5357036-2"
+enableRobotsTXT: true
 
 disableKinds:
 - taxonomy
