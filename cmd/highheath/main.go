@@ -13,7 +13,7 @@ import (
 
 func main() {
 	handler := http.NewServeMux()
-	wrappedHandler := handlers.RecoveryHandler()(handlers.CombinedLoggingHandler(os.Stdout, handler))
+	wrappedHandler := handlers.RecoveryHandler()(handlers.ProxyHeaders(handlers.CombinedLoggingHandler(os.Stdout, handler)))
 	server := &http.Server{
 		Handler: wrappedHandler,
 		Addr:    "0.0.0.0:8080",
