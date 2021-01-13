@@ -40,7 +40,7 @@ jobs:
 
     # Gets current tag name and puts it into an environment variable GIT_TAG_NAME
     - name: Get tag name
-      uses: olegtarasov/get-tag@v2
+      uses: olegtarasov/get-tag@v2.1
 
     - name: Helm tool installer
       uses: Azure/setup-helm@v1
