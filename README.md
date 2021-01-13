@@ -42,6 +42,13 @@ Github Actions are triggered to build and deploy the app on release. Release
 Drafter is used to draft releases based on pull request titles. A service
 account is used to deploy via helm3. This must be created first.
 
+### Cleaning old docker images
+
+A helper to clean docker images from the registry after many tags have been pushed.
+
+`python docker/clean_images.py` for a dry run. Add `--delete` to actually delete
+them.
+
 ### Github Actions Setup
 
 To create the service account and permissions, a cluster-admin needs to apply
