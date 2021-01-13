@@ -13,9 +13,9 @@ Please note you must state on the booking form if you plan to collect your cat b
 {.table .pure-table .table-striped .table-responsive}
 Number of cats|Price per Pen per day
 --------------|---------------------
-1|£10.00
-2 cats sharing|£15.00
-3 cats sharing|£21.00
-4 or more cats sharing|Ask for quote
+1|£11.00
+2 cats sharing|£16.00
+3 cats sharing|£23.00
+4 cats sharing|£26.00
 
 Prices are subject to change without notice.

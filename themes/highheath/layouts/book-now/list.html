@@ -292,7 +292,7 @@
                 grecaptcha.execute('6LduNcIZAAAAAMDI8V6EwSAEXz1lMOAQUn6OO_pT', {action: 'submit'}).then(function(token) {
                     pens = parseInt($(".Pens select option:selected").val(), 10);
                     days = Math.round((moment($("#DepartureDate input").val(), "DD-MM-YYYY") - moment($("#ArrivalDate input").val(), "DD-MM-YYYY")) / (1000*60*60*24));
-                    gtag('event', 'BookingForm', { 'event_category': 'FormSubmit', 'value': pens * days * 10});
+                    gtag('event', 'BookingForm', { 'event_category': 'FormSubmit', 'value': pens * days * 11});
                     $("#Token").val(token);
                     document.getElementById("booking-form").submit();
                 });
