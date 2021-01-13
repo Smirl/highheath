@@ -102,6 +102,17 @@ label span {
 	color: #999999;
 }
 
+/* Opening time table */
+table.table {
+	color: #444444;
+}
+table.table .opening-times-open {
+	background-color: #A3D06E;
+}
+table.table .opening-times-closed {
+	background-color: #F19386;
+}
+
 /* SMIRLWEBS LOGO */
 .smirlwebLarge, .smirlwebLarge a {
 	font-family: 'Times New Roman', times-roman, georgia, serif;
