@@ -35,6 +35,11 @@ up following the usual look up order. In this project that is usually:
 * `theme/highheath/layouts/_default/single.html`
 * `theme/highheath/layouts/<page>/list.html`  # if it is a content type
 
+### New Relic
+
+There is the `<script>` tag in the `<head>` for New Relic Browser integration.
+The snippet is available in the New Relic UI.
+
 
 ## Deployment
 
