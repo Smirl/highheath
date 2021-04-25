@@ -32,6 +32,8 @@ spec:
             secretKeyRef:
               name: recaptcha
               key: secret
+        - name: TOKEN_FILE
+          value: token.json
         volumeMounts:
         - mountPath: /credentials.json
           subPath: credentials.json
