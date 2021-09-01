@@ -12,7 +12,6 @@ sections:
 - type: document
   path: content/accommodation/index.md
   label: Accommodation
-  match: "**/*"
 - type: document
   path: content/prices.md
   label: Prices
