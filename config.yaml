@@ -16,3 +16,9 @@ outputs:
     - HTML
   section:
     - HTML
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
