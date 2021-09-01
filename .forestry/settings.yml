@@ -4,19 +4,22 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
+- type: document
+  path: content/_index.md
+  label: Home Page
+  match: "**/*"
 - type: directory
   path: content/accommodation
   label: Accommodation
   create: all
   match: "**/*"
-- type: directory
-  path: content/book-now
-  label: Book now
-  create: all
+- type: document
+  path: content/prices.md
+  label: Prices
   match: "**/*"
 - type: directory
   path: content/comments
-  label: Comments
+  label: Reviews
   create: all
   match: "**/*"
 - type: directory
@@ -25,10 +28,18 @@ sections:
   create: all
   match: "**/*"
 - type: directory
-  path: content
-  label: Pages
+  path: content/book-now
+  label: Book now
   create: all
-  match: "*"
+  match: "**/*"
+- type: document
+  path: content/privacy-policy.md
+  label: Privacy Policy
+  match: "**/*"
+- type: document
+  path: content/terms-conditions.md
+  label: Terms & Conditions
+  match: "**/*"
 upload_dir: static/uploads
 public_path: "/uploads"
 front_matter_path: ''
