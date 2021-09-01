@@ -1,13 +1,12 @@
 ---
 new_page_extension: md
 auto_deploy: false
-admin_path: 
+admin_path: static/admin
 webhook_url: 
 sections:
 - type: document
   path: content/_index.md
   label: Home Page
-  match: "**/*"
 - type: directory
   path: content/accommodation
   label: Accommodation
@@ -16,7 +15,6 @@ sections:
 - type: document
   path: content/prices.md
   label: Prices
-  match: "**/*"
 - type: directory
   path: content/comments
   label: Reviews
@@ -35,11 +33,9 @@ sections:
 - type: document
   path: content/privacy-policy.md
   label: Privacy Policy
-  match: "**/*"
 - type: document
   path: content/terms-conditions.md
   label: Terms & Conditions
-  match: "**/*"
 upload_dir: static/uploads
 public_path: "/uploads"
 front_matter_path: ''
