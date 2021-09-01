@@ -4,13 +4,14 @@ auto_deploy: false
 admin_path: static/admin
 webhook_url: 
 sections:
+- type: heading
+  label: Pages
 - type: document
   path: content/_index.md
   label: Home Page
-- type: directory
-  path: content/accommodation
+- type: document
+  path: content/accommodation/index.md
   label: Accommodation
-  create: all
   match: "**/*"
 - type: document
   path: content/prices.md
@@ -20,6 +21,7 @@ sections:
   label: Reviews
   create: all
   match: "**/*"
+  exclude: 20*
 - type: directory
   path: content/contact-us
   label: Contact us
@@ -36,6 +38,13 @@ sections:
 - type: document
   path: content/terms-conditions.md
   label: Terms & Conditions
+- type: heading
+  label: Comments
+- type: directory
+  path: content/comments
+  label: Reviews
+  create: all
+  match: 20*
 upload_dir: static/uploads
 public_path: "/uploads"
 front_matter_path: ''
