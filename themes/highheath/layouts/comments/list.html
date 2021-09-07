@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="row">
-            {{ $paginator := .Paginate .Pages 20 }}
+            {{ $paginator := .Paginate (where .Pages ".Params.hide" "!=" true) 20 }}
             <div class="col-sm-12">
                 <nav aria-label="Page navigation" class="text-center">
                     {{ template "_internal/pagination.html" . }}

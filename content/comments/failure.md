@@ -1,6 +1,7 @@
 ---
 title: Review Failed
 home_button: true
+hide: true
 ---
 
 Something has gone wrong. Please try again.

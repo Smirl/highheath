@@ -1,7 +1,7 @@
 ---
 title: Thank you for your Review
 home_button: true
-
+hide: true
 ---
 Thank you for writing us a review. 
 
