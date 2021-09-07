@@ -1,0 +1,17 @@
+---
+label: Prices
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: field_group_list
+  name: prices
+  label: prices
+  fields:
+  - type: text
+    name: num
+    label: num
+  - type: text
+    name: price
+    label: price
