@@ -8,3 +8,5 @@ fields:
 - type: boolean
   name: home_button
   label: home_button
+pages:
+- content/comments/success.md
