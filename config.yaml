@@ -22,3 +22,6 @@ markup:
     parser:
       attribute:
         block: true
+
+params:
+  debug: false # adds template debugging to pages
