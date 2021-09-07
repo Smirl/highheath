@@ -11,7 +11,18 @@ fields:
   fields:
   - type: text
     name: num
-    label: num
+    label: Number of Cats
+    description: The text which will be in the left column of the table on the prices
+      page
+    config:
+      required: true
   - type: text
     name: price
-    label: price
+    label: Price
+    description: The text which will be in the right column of the table on the prices
+      page
+    config:
+      required: true
+  config:
+    labelField: num
+    min: 1
