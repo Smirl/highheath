@@ -14,12 +14,34 @@
         <div class="row">
             <div class="col-sm-12">
                 <ul id="gallery">
-                {{ range . }}
+                    {{ range . }}
                     <li>
                         <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="img-responsive center-block">
                     </li>
-                {{ end }}
+                    {{ end }}
                 </ul>
+            </div>
+        </div>
+        {{ end }}
+        {{ with $.Param "prices" }}
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table pure-table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Number of cats</th>
+                            <th>Price per Pen per day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{- range . }}
+                        <tr>
+                            <td>{{ .num }}</td>
+                            <td>{{ .price }}</td>
+                        </tr>
+                        {{- end }}
+                    </tbody>
+                </table>
             </div>
         </div>
         {{ end }}
@@ -38,8 +60,8 @@
 {{ with .Resources.ByType "image" }}
 <div id="extra-scripts">
     <script>
-        $(document).ready(function() {
-            $("#gallery").lightSlider({item: 1, auto: true, pauseOnHover: true, loop: true, autoWidth: true, pause: 3000, speed: 1000});
+        $(document).ready(function () {
+            $("#gallery").lightSlider({ item: 1, auto: true, pauseOnHover: true, loop: true, autoWidth: true, pause: 3000, speed: 1000 });
         });
     </script>
 </div>
