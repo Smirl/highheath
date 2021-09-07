@@ -10,13 +10,13 @@
                 {{ .Content }}
             </div>
         </div>
-        {{ with .Resources.ByType "image" }}
+        {{ with $.Param "gallery" }}
         <div class="row">
             <div class="col-sm-12">
                 <ul id="gallery">
                     {{ range . }}
                     <li>
-                        <img src="{{ .RelPermalink }}" alt="{{ .Name }}" class="img-responsive center-block">
+                        <img src="{{ . | relURL }}" alt="{{ . }}" class="img-responsive center-block">
                     </li>
                     {{ end }}
                 </ul>
@@ -57,7 +57,7 @@
 {{ end }}
 
 {{ define "extra_scripts" }}
-{{ with .Resources.ByType "image" }}
+{{ with $.Param "gallery" }}
 <div id="extra-scripts">
     <script>
         $(document).ready(function () {
