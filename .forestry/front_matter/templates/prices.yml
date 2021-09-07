@@ -26,3 +26,5 @@ fields:
   config:
     labelField: num
     min: 1
+pages:
+- content/prices.md
