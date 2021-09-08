@@ -28,9 +28,15 @@ var hermesConfig = hermes.Hermes{
 	},
 }
 
-var commentTemplate = template.Must(
-	template.New("comment").Parse("---\nauthor: {{ .Name }}\ndate: {{ .Date.Format `2006-01-02 15:04:05` }}\n---\n{{ .Message }}\n"),
-)
+var commentTemplateBody = `---
+author: {{ .Name }}
+date: {{ .Date.Format "2006-01-02 15:04:05" }}
+title: "Comment from {{ .Name }} | {{ .Date.Format "2006-01-02" }}"
+---
+{{ .Message }}
+
+`
+var commentTemplate = template.Must(template.New("comment").Parse(commentTemplateBody))
 
 func ToDict(message interface{}) []hermes.Entry {
 	var dict []hermes.Entry
