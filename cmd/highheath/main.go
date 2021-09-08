@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gorilla/handlers"
+	"github.com/gorilla/schema"
 
 	"github.com/smirl/highheath/pkg/highheath"
 )
@@ -23,11 +24,17 @@ func main() {
 		IdleTimeout:       30 * time.Second,
 		ReadHeaderTimeout: 2 * time.Second,
 	}
-
+	ac := highheath.AppContext{
+		Decoder:      schema.NewDecoder(),
+		GmailClient:  highheath.GmailClient(),
+		GithubClient: highheath.GithubClient(),
+		Recaptcha:    highheath.NewRecaptcha(),
+	}
+	ac.Decoder.IgnoreUnknownKeys(true)
 	handler.HandleFunc("/health", highheath.HandleHealth)
-	handler.HandleFunc("/api/booking", highheath.HandleBookingForm)
-	handler.HandleFunc("/api/contact", highheath.HandleContactForm)
-	handler.HandleFunc("/api/comment", highheath.HandleCommentForm)
+	handler.Handle("/api/booking", &highheath.Handler{AppContext: ac, H: highheath.HandleBookingForm})
+	handler.Handle("/api/contact", &highheath.Handler{AppContext: ac, H: highheath.HandleContactForm})
+	handler.Handle("/api/comment", &highheath.Handler{AppContext: ac, H: highheath.HandleCommentForm})
 	handler.Handle("/", http.FileServer(http.Dir("./public")))
 	log.Println("Starting server on 0.0.0.0:8080")
 	server.ListenAndServe()
