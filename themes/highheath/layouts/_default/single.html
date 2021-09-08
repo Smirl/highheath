@@ -3,14 +3,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                {{ with .Title }}
-                <h1>{{ . }}</h1>
-                <hr>
-                {{ end }}
-                {{ if eq $.Section "comments" }}
+                {{ if and (eq $.Section "comments") (ne $.Params.hide true) }}
                 <h1>{{ .Params.author }}</h1>
                 <h3>{{ .Date.Format "2 January 2006" }}</h3>
+                {{ else }}
+                <h1>{{ .Title }}</h1>
                 {{ end }}
+                <hr>
                 {{ .Content }}
             </div>
         </div>
@@ -56,7 +55,7 @@
             </div>
         </div>
         {{ end }}
-        {{ if eq $.Section "comments" }}
+        {{ if and (eq $.Section "comments") (ne $.Params.hide true) }}
         <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
                 <a onclick="window.history.back()" role="button" class="btn btn-lg btn-primary btn-block">Back</a>
