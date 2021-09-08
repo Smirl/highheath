@@ -211,11 +211,11 @@ func (booking *Booking) GetEmail() *hermes.Email {
 	}
 }
 
-func ValidateForm(email EmailableMessage) error {
+func ValidateForm(r *Recaptcha, email EmailableMessage) error {
 	if email.GetEmailCheck() != "" {
 		return fmt.Errorf("Bot Suspected from email check")
 	}
-	if ok, err := VerifyToken(email.GetToken()); err != nil {
+	if ok, err := r.VerifyToken(email.GetToken()); err != nil {
 		return err
 	} else if !ok {
 		return fmt.Errorf("Bot Suspected from token")
@@ -240,14 +240,14 @@ func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
 	if err != nil {
 		return err
 	}
-	if _, err := gmailClient.Users.Messages.Send("me", message).Do(); err != nil {
+	if _, err := client.Users.Messages.Send("me", message).Do(); err != nil {
 		return err
 	}
 	message, err = createMessageFromEmail(name, emailAddress, company, companyEmailAddress, subject, hermesEmail)
 	if err != nil {
 		return err
 	}
-	if _, err := gmailClient.Users.Messages.Insert("me", message).Do(); err != nil {
+	if _, err := client.Users.Messages.Insert("me", message).Do(); err != nil {
 		return err
 	}
 	return nil

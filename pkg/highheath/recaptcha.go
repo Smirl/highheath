@@ -9,19 +9,14 @@ import (
 )
 
 var RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"
-var RECAPTCHA_SECRET string
 
-func init() {
-	if secret, ok := os.LookupEnv("RECAPTCHA_SECRET"); ok {
-		RECAPTCHA_SECRET = secret
-	} else {
-		log.Fatal("Unable to read RECAPTCHA_SECRET")
-	}
+type Recaptcha struct {
+	secret string
 }
 
-func VerifyToken(token string) (success bool, err error) {
+func (r *Recaptcha) VerifyToken(token string) (success bool, err error) {
 	values := url.Values{}
-	values.Set("secret", RECAPTCHA_SECRET)
+	values.Set("secret", r.secret)
 	values.Set("response", token)
 	resp, err := http.PostForm(RECAPTCHA_URL, values)
 	if err != nil {
@@ -35,4 +30,13 @@ func VerifyToken(token string) (success bool, err error) {
 	log.Println(response)
 
 	return response["success"].(bool), nil
+}
+
+func NewRecaptcha() *Recaptcha {
+	if secret, ok := os.LookupEnv("RECAPTCHA_SECRET"); ok {
+		log.Printf("Recaptcha: %s", secret)
+		return &Recaptcha{secret: secret}
+	}
+	log.Fatal("Unable to read RECAPTCHA_SECRET")
+	return nil
 }
