@@ -19,6 +19,7 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      revisionHistoryLimit: 1
       containers:
       - image: "registry.smirlwebs.com/smirl/{{ .Release.Name }}:{{ .Values.version }}"
         imagePullPolicy: Always
