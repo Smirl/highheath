@@ -1,10 +1,11 @@
 ---
 title: Contact Us
+aliases:
+- "/opening-hours/"
 menu:
   main:
-    weight: 5
-aliases:
-  - /opening-hours/
+    weight: 6
+
 ---
 _See our [opening hours](#opening-times) below._
 
@@ -21,4 +22,4 @@ forms and bring them with you or send them to the address below.
 **High Heath Farm Cattery**  
 Withy Hill Road  
 Sutton Coldfield  
-B75 6JT  
+B75 6JT

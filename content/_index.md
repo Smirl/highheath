@@ -1,9 +1,10 @@
 ---
-title: "High Heath Farm Cattery"
-linktitle: "Home"
+title: High Heath Farm Cattery
+linktitle: Home
 menu:
   main:
     weight: 1
+
 ---
 ### Welcome to High Heath Farm Cattery
 

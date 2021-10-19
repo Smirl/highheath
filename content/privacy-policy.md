@@ -1,8 +1,9 @@
 ---
-title: "Privacy Policy"
+title: Privacy Policy
 menu:
   footer:
-    weight: 3
+    weight: 1
+
 ---
 High Heath Farm Cattery is committed to protecting and respecting your private
 and personal details. Any information we collect will only be used by staff and

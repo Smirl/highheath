@@ -1,27 +1,28 @@
-baseURL: "https://highheathcattery.co.uk/"
-languageCode: "en-us"
-title: "High Heath Farm Cattery"
-theme: "highheath"
-googleAnalytics: "UA-5357036-2"
+---
+baseURL: https://highheathcattery.co.uk/
+languageCode: en-us
+title: High Heath Farm Cattery
+theme: highheath
+googleAnalytics: UA-5357036-2
 enableRobotsTXT: true
-
 disableKinds:
 - taxonomy
 - taxonomyTerm
-
 outputs:
   page:
-    - HTML
+  - HTML
   home:
-    - HTML
+  - HTML
   section:
-    - HTML
-
+  - HTML
 markup:
   goldmark:
     parser:
       attribute:
         block: true
-
 params:
-  debug: false # adds template debugging to pages
+  debug: false
+menu:
+  main:
+  - name: Opening Hours
+    weight: 3
