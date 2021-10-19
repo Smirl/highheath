@@ -24,5 +24,6 @@ params:
   debug: false
 menu:
   main:
-  - name: Opening Hours
+  - url: Opening Hours
+    name: Opening Hours
     weight: 3
