@@ -1,15 +1,24 @@
 ---
 title: Accommodation
 gallery:
-- uploads/1.jpg
-- uploads/1.jpg
-- uploads/2.jpg
-- uploads/3.jpg
-- uploads/4.jpg
-- uploads/5.jpg
-- uploads/6.jpg
-- uploads/7.jpg
-- uploads/8.jpg
+- "/uploads/img_4646.jpg"
+- "/uploads/img_4919.jpg"
+- "/uploads/img_4652.jpg"
+- "/uploads/img_5108-3106.jpg"
+- "/uploads/img_4986.jpg"
+- "/uploads/img_5117.jpg"
+- "/uploads/img_4635.jpg"
+- "/uploads/img_6772.jpg"
+- "/uploads/img_2128.jpg"
+- "/uploads/img_4673.jpg"
+- "/uploads/img_6127.jpg"
+- "/uploads/img_3745.jpg"
+- "/uploads/img_4385.jpg"
+- "/uploads/img_2154.jpg"
+- "/uploads/img_2200.jpg"
+- "/uploads/img_2205.jpg"
+- "/uploads/img_2250.jpg"
+- "/uploads/img_2266.jpg"
 - uploads/9.jpg
 - uploads/10.jpg
 - uploads/11.jpg
@@ -19,7 +28,6 @@ gallery:
 - uploads/15.jpg
 - uploads/16.jpg
 - uploads/17.jpg
-- uploads/18.jpg
 - uploads/19.jpg
 - uploads/20.jpg
 - uploads/21.jpg
@@ -36,9 +44,7 @@ menu:
     weight: 2
 
 ---
-State of the art penthouse accommodation of UPVC construction. Each with its own
-thermostatically controlled heating. The majority of our pens have a great view
-over looking the countryside so your cat can have a holiday as well.
+State of the art penthouse accommodation of UPVC construction. Each with its own thermostatically controlled heating all year round which is included in the daily rate. The majority of our pens have a great view over looking the countryside so your cat can have a holiday as well.
 
 All suites have been built inside an existing building so its warm in the winter
 and cool in the summer.
