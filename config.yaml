@@ -27,3 +27,5 @@ menu:
   - url: Opening Hours
     name: Opening Hours
     weight: 3
+  - name: Gallery
+    weight: 5
