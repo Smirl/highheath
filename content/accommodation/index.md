@@ -2,6 +2,11 @@
 title: Accommodation
 gallery:
 - "/uploads/img_4646.jpg"
+- "/uploads/img_4646.jpg"
+- "/uploads/25.jpg"
+- "/uploads/24.jpg"
+- "/uploads/16.jpg"
+- "/uploads/19.jpg"
 - "/uploads/img_4919.jpg"
 - "/uploads/img_4652.jpg"
 - "/uploads/img_5108-3106.jpg"
