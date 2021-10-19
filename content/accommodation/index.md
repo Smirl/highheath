@@ -1,6 +1,8 @@
 ---
 title: Accommodation
 gallery:
+- "/uploads/reception.jpg"
+- "/uploads/kitchen.jpg"
 - "/uploads/944b4e35-bc12-4a86-94b4-542a3dcc4c91.JPG"
 - "/uploads/img_2017.jpg"
 - "/uploads/img_0114.jpg"
