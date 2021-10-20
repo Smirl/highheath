@@ -18,15 +18,12 @@ sections:
 - type: document
   path: content/comments/_index.md
   label: Review Page
-  match: "**/*"
 - type: document
   path: content/contact-us/_index.md
   label: Contact Us / Opening Times
-  match: "**/*"
 - type: document
   path: content/book-now/_index.md
   label: Booking Page
-  match: "**/*"
 - type: document
   path: content/privacy-policy.md
   label: Privacy Policy
@@ -42,6 +39,24 @@ sections:
   match: 20*
 - type: heading
   label: Form Redirect Pages
+- type: document
+  path: content/comments/success.md
+  label: Review Success
+- type: document
+  path: content/comments/failure.md
+  label: Review Failure
+- type: document
+  path: content/contact-us/success.md
+  label: Contact Form Success
+- type: document
+  path: content/contact-us/failure.md
+  label: Contact Form Failure
+- type: document
+  path: content/comments/success.md
+  label: Booking Success
+- type: document
+  path: content/comments/failure.md
+  label: Booking Failure
 upload_dir: static/uploads
 public_path: "/uploads"
 front_matter_path: ''

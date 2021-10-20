@@ -8,3 +8,10 @@ fields:
 - type: boolean
   name: home_button
   label: home_button
+pages:
+- content/book-now/failure.md
+- content/book-now/success.md
+- content/comments/failure.md
+- content/comments/success.md
+- content/contact-us/failure.md
+- content/contact-us/success.md
