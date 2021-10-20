@@ -64,46 +64,20 @@
                             <th>Closed</th>
                             <th>Open PM</th>
                         </tr>
+                        {{- with $.Param "opening_times" }}
+                        {{- range . }}
                         <tr>
-                            <td>Monday</td>
-                            <td class="opening-times-open">8:00am - 11:30am</td>
+                            <td>{{ .day }}</td>
+                            <td class="opening-times-open">{{ .morning_open }} - {{ .morning_close }}</td>
+                            {{- if .afternoon }}
                             <td class="opening-times-closed">closed</td>
-                            <td class="opening-times-open">4:00pm - 5:30pm</td>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <td class="opening-times-open">8:00am - 11:30am</td>
-                            <td class="opening-times-closed">closed</td>
-                            <td class="opening-times-open">4:00pm - 5:30pm</td>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
-                            <td class="opening-times-open">8:00am - 11:30am</td>
+                            <td class="opening-times-open">{{ .afternoon_open }} - {{ .afternoon_close }}</td>
+                            {{- else }}
                             <td class="opening-times-closed" colspan="2">closed</td>
+                            {{- end }}
                         </tr>
-                        <tr>
-                            <td>Thursday</td>
-                            <td class="opening-times-open">8:00am - 11:30am</td>
-                            <td class="opening-times-closed">closed</td>
-                            <td class="opening-times-open">4:00pm - 5:30pm</td>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <td class="opening-times-open">8:00am - 11:30am</td>
-                            <td class="opening-times-closed">closed</td>
-                            <td class="opening-times-open">4:00pm - 5:30pm</td>
-                        </tr>
-                        <tr>
-                            <td>Saturday</td>
-                            <td class="opening-times-open">8:00am - 11:00am</td>
-                            <td class="opening-times-closed">closed</td>
-                            <td class="opening-times-open">2:00pm - 4:00pm</td>
-                        </tr>
-                        <tr>
-                            <td>Sunday & Bank Holidays</td>
-                            <td class="opening-times-open">10:00am - 12:00pm</td>
-                            <td class="opening-times-closed" colspan="2">closed</td>
-                        </tr>
+                        {{- end }}
+                        {{- end }}
                     </table>
                 </div>
             </div>
