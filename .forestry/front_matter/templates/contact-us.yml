@@ -8,3 +8,71 @@ fields:
 - type: list
   name: aliases
   label: aliases
+- name: opening_times
+  type: field_group_list
+  fields:
+  - name: day
+    type: select
+    default: []
+    config:
+      required: false
+      options:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+      - Sunday & Bank Holidays
+      source:
+        type: simple
+        section: prices
+        file: content/prices.md
+        path: 
+    label: Day
+    description: Day of the week
+  - name: morning_open
+    type: text
+    config:
+      required: true
+    label: Morning Open
+    description: Time in the morning you open.
+    default: 8:00am
+  - name: morning_close
+    type: text
+    config:
+      required: false
+    label: Morning Close
+    description: Time in the morning you close.
+    default: 11:30am
+  - name: afternoon
+    type: boolean
+    label: Afternoon?
+    description: Are you open in the afternoon on this day?
+    default: true
+  - name: afternoon_open
+    type: text
+    config:
+      required: false
+    label: Afternoon Open
+    description: Time in the afternoon you open.
+    default: 4:00pm
+    showOnly:
+      field: afternoon
+      value: true
+  - name: afternoon_close
+    type: text
+    config:
+      required: false
+    description: Time in the afternoon you close.
+    label: Afternoon Close
+    default: 5:30pm
+    showOnly:
+      field: afternoon
+      value: true
+  config:
+    min: 7
+    max: 7
+    labelField: 
+  label: Opening Times
+  description: Morning and optional Afternoon opening hours for each day of the week.
