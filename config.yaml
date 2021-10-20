@@ -22,10 +22,3 @@ markup:
         block: true
 params:
   debug: false
-menu:
-  main:
-  - url: Opening Hours
-    name: Opening Hours
-    weight: 3
-  - name: Gallery
-    weight: 5

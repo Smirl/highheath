@@ -4,7 +4,7 @@ aliases:
 - "/opening-hours/"
 menu:
   main:
-    weight: 7
+    weight: 5
 
 ---
 _See our_ [_opening hours_](#opening-times) _below._
