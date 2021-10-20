@@ -2,6 +2,49 @@
 title: Contact Us
 aliases:
 - "/opening-hours/"
+opening_times:
+- morning_open: 8:00am
+  morning_close: 11:30am
+  afternoon: true
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Monday
+- morning_open: 8:00am
+  morning_close: 11:30am
+  afternoon: true
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Tuesday
+- morning_open: 8:00am
+  morning_close: 11:30am
+  afternoon: false
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Wednesday
+- morning_open: 8:00am
+  morning_close: 11:30am
+  afternoon: true
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Thursday
+- morning_open: 8:00am
+  morning_close: 11:30am
+  afternoon: true
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Friday
+- morning_open: 8:00am
+  morning_close: 11:00am
+  afternoon: true
+  afternoon_open: 2:00pm
+  afternoon_close: 4:00pm
+  day: Saturday
+- morning_open: 10:00am
+  morning_close: 12:00am
+  afternoon: false
+  afternoon_open: 4:00pm
+  afternoon_close: 5:30pm
+  day: Sunday & Bank Holidays
 menu:
   main:
     weight: 5
