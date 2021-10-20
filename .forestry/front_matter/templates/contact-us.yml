@@ -15,7 +15,7 @@ fields:
     type: select
     default: []
     config:
-      required: false
+      required: true
       options:
       - Monday
       - Tuesday
@@ -26,9 +26,6 @@ fields:
       - Sunday & Bank Holidays
       source:
         type: simple
-        section: prices
-        file: content/prices.md
-        path: 
     label: Day
     description: Day of the week
   - name: morning_open
@@ -41,7 +38,7 @@ fields:
   - name: morning_close
     type: text
     config:
-      required: false
+      required: true
     label: Morning Close
     description: Time in the morning you close.
     default: 11:30am
