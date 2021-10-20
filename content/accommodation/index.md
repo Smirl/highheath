@@ -23,7 +23,6 @@ gallery:
 - "/uploads/img_2128.jpg"
 - "/uploads/img_4673.jpg"
 - "/uploads/img_6127.jpg"
-- "/uploads/img_3745.jpg"
 - "/uploads/img_4385.jpg"
 - "/uploads/img_2154.jpg"
 - "/uploads/img_2200.jpg"
