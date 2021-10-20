@@ -52,10 +52,10 @@ sections:
   path: content/contact-us/failure.md
   label: Contact Form Failure
 - type: document
-  path: content/comments/success.md
+  path: content/book-now/success.md
   label: Booking Success
 - type: document
-  path: content/comments/failure.md
+  path: content/book-now/failure.md
   label: Booking Failure
 upload_dir: static/uploads
 public_path: "/uploads"
