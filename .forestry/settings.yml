@@ -15,21 +15,17 @@ sections:
 - type: document
   path: content/prices.md
   label: Prices
-- type: directory
-  path: content/comments
-  label: Reviews
-  create: all
+- type: document
+  path: content/comments/_index.md
+  label: Review Page
   match: "**/*"
-  exclude: 20*
-- type: directory
-  path: content/contact-us
-  label: Contact us
-  create: all
+- type: document
+  path: content/contact-us/_index.md
+  label: Contact Us / Opening Times
   match: "**/*"
-- type: directory
-  path: content/book-now
-  label: Book now
-  create: all
+- type: document
+  path: content/book-now/_index.md
+  label: Booking Page
   match: "**/*"
 - type: document
   path: content/privacy-policy.md
@@ -44,6 +40,8 @@ sections:
   label: Reviews
   create: all
   match: 20*
+- type: heading
+  label: Form Redirect Pages
 upload_dir: static/uploads
 public_path: "/uploads"
 front_matter_path: ''

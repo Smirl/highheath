@@ -73,5 +73,3 @@ fields:
     labelField: day
   label: Opening Times
   description: Morning and optional Afternoon opening hours for each day of the week.
-pages:
-- content/contact-us/_index.md
