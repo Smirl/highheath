@@ -1,0 +1,10 @@
+---
+label: Contact Us
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: list
+  name: aliases
+  label: aliases
