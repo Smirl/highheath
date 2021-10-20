@@ -73,6 +73,6 @@ fields:
   config:
     min: 7
     max: 7
-    labelField: 
+    labelField: day
   label: Opening Times
   description: Morning and optional Afternoon opening hours for each day of the week.
