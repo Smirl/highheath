@@ -6,3 +6,4 @@ token.dev.json
 *.pem
 recaptcha.json
 coverage.out
+resources/

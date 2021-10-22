@@ -22,3 +22,10 @@ markup:
         block: true
 params:
   debug: false
+menu:
+  main:
+    - name: Gallery
+      url: /accommodation/#gallery
+      weight: 3
+    - name: Opening Hours
+      url: /contact-us/#opening-times
