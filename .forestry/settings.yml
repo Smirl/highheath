@@ -57,7 +57,7 @@ sections:
 - type: document
   path: content/book-now/failure.md
   label: Booking Failure
-upload_dir: static/uploads
+upload_dir: assets/uploads
 public_path: "/uploads"
 front_matter_path: ''
 use_front_matter_path: false

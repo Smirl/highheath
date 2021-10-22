@@ -34,6 +34,21 @@ nav .border{
 	background: #3179D2;
 }
 
+/* Gallery */
+
+#gallery .gallery-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#gallery .gallery-container img {
+	height: 300px;
+	margin: 2px;
+	flex-grow: 1;
+	object-fit: cover;
+	max-width: 100%;
+}
+
 /* HELPERS*/
 .a {
 	cursor: pointer;
