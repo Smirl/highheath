@@ -1,8 +1,7 @@
 <div id="scripts">
     {{ $jquery := resources.Get "/js/jquery-1.10.2.min.js" -}}
     {{- $bootstrap := resources.Get "/js/bootstrap.min.js" -}}
-    {{- $lightslider := resources.Get "js/lightslider.js" -}}
-    {{- $js := slice $jquery $bootstrap $lightslider | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
+    {{- $js := slice $jquery $bootstrap | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous"></script>

@@ -16,8 +16,7 @@
 
     {{ $bootstrap := resources.Get "css/bootstrap.min.css" -}}
     {{- $style := resources.Get "css/style.css" -}}
-    {{- $lightslider := resources.Get "css/lightslider.css" -}}
-    {{- $css := slice $bootstrap $lightslider $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
+    {{- $css := slice $bootstrap $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
