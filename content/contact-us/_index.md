@@ -7,13 +7,13 @@ opening_times:
   morning_close: 11:30am
   afternoon: true
   afternoon_open: 4:00pm
-  afternoon_close: 5:30pm
+  afternoon_close: 5:15pm
   day: Monday
 - morning_open: 8:00am
   morning_close: 11:30am
   afternoon: true
   afternoon_open: 4:00pm
-  afternoon_close: 5:30pm
+  afternoon_close: 5:15pm
   day: Tuesday
 - morning_open: 8:00am
   morning_close: 11:30am
@@ -25,13 +25,13 @@ opening_times:
   morning_close: 11:30am
   afternoon: true
   afternoon_open: 4:00pm
-  afternoon_close: 5:30pm
+  afternoon_close: 5:15pm
   day: Thursday
 - morning_open: 8:00am
   morning_close: 11:30am
   afternoon: true
   afternoon_open: 4:00pm
-  afternoon_close: 5:30pm
+  afternoon_close: 5:15pm
   day: Friday
 - morning_open: 8:00am
   morning_close: 11:00am
