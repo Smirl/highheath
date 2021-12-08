@@ -18,9 +18,15 @@
             <div class="col-sm-12">
                 <h2>Gallery</h2>
                 <div class="gallery-container">
-                    {{ range  $name := . }}
-                    {{ $img := resources.Get $name }}
-                    {{ $img := $img.Resize "x300" }}
+                    {{- range  $name := . }}
+                    {{- $img := resources.Get $name }}
+                    {{- with $img.Exif }}
+                    {{- if eq .Tags.Orientation 6}}
+                    {{- $img = $img.Resize "x300 webp q80 r270" }}
+                    {{- else }}
+                    {{- $img = $img.Resize "x300 webp q80" }}
+                    {{- end }}
+                    {{- end }}
                     <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" class="img-fluid flex-grow-1" width="{{ $img.Width }}" height="{{ $img.Height }}">
                     {{ end }}
                 </div>
