@@ -1,5 +1,5 @@
 # build hugo
-FROM klakegg/hugo:0.87.0-alpine AS hugo
+FROM klakegg/hugo:0.87.0-ext-alpine AS hugo
 COPY . /src
 RUN hugo --minify --cleanDestinationDir
 
