@@ -20,14 +20,24 @@
                 <div class="gallery-container">
                     {{- range  $name := . }}
                     {{- $img := resources.Get $name }}
+                    {{- $orientation := 0 }}
+
                     {{- with $img.Exif }}
-                    {{- if eq .Tags.Orientation 6}}
-                    {{- $img = $img.Resize "x300 webp q80 r270" }}
-                    {{- else }}
-                    {{- $img = $img.Resize "x300 webp q80" }}
+                    {{- if .Tags.Orientation}}
+                    {{- $orientation = .Tags.Orientation }}
                     {{- end }}
                     {{- end }}
-                    <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" class="img-fluid flex-grow-1" width="{{ $img.Width }}" height="{{ $img.Height }}">
+
+                    {{- $webp := $img.Resize "x300 webp q80" }}
+                    {{- $jpeg := $img.Resize "x300 jpeg q80" }}
+                    {{- if eq $orientation 6 }}
+                    {{- $webp = $img.Resize "x300 webp q80 r270" }}
+                    {{- $jpeg = $img.Resize "x300 jpeg q80 r270" }}
+                    {{- end }}
+                    <picture>
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $jpeg.RelPermalink }}" alt="{{ $name }}" width="{{ $jpeg.Width }}" height="{{ $jpeg.Height }}">
+                    </picture>
                     {{ end }}
                 </div>
             </div>
