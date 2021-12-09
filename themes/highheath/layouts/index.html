@@ -6,7 +6,13 @@
                         {{ .Content }}
                 </div>
                 <div class="col-sm-4 text-right">
-                    <img src="{{ `/img/home1.jpg` | relURL }}" alt="" style="margin: 0 auto;">
+                    {{- $img := resources.Get "/img/home1.jpg" }}
+                    {{- $webp := $img.Resize "225x300 webp q80" }}
+                    {{- $jpeg := $img.Resize "225x300 jpeg q80" }}
+                    <picture style="margin: 0 auto;">
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $jpeg.RelPermalink }}" style="width: 100%;">
+                    </picture>
                 </div>
             </div>
             <div class="row">
@@ -23,7 +29,13 @@
                     </p>
                 </div>
                 <div class="col-sm-4 col-sm-pull-8">
-                    <img src="{{ `/img/home2.jpg` | relURL }}" alt="" style="margin: 0 auto;">
+                    {{- $img := resources.Get "/img/home2.jpg" }}
+                    {{- $webp := $img.Resize "300x200 webp q80" }}
+                    {{- $jpeg := $img.Resize "300x200 jpeg q80" }}
+                    <picture style="margin: 0 auto;">
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $jpeg.RelPermalink }}" style="width: 100%;">
+                    </picture>
                 </div>
             </div>
         </div>
