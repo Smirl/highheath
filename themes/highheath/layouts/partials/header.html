@@ -3,8 +3,20 @@
         <div class="row">
             <div class="border no-padding">
                 <a href="/" alt="Home">
-                    <img class="hidden-xs" src="{{ "/img/header.png" | relURL }}" style="width: 100%;">
-                    <img class="visible-xs" src="{{ "/img/header_small.png" | relURL }}" style="width: 100%;">
+                    {{- $img := resources.Get "/img/header.png" }}
+                    {{- $webp := $img.Resize "750x200 webp q80" }}
+                    {{- $png := $img.Resize "750x200 png q80" }}
+                    <picture class="hidden-xs" style="width: 100%;">
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $png.RelPermalink }}" style="width: 100%;">
+                    </picture>
+                    {{- $img := resources.Get "/img/header_small.png" }}
+                    {{- $webp := $img.Resize "440x200 webp q80" }}
+                    {{- $png := $img.Resize "440x200 png q80" }}
+                    <picture class="visible-xs" style="width: 100%;">
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $png.RelPermalink }}" style="width: 100%;">
+                    </picture>
                 </a>
             </div>
         </div>
@@ -30,7 +42,7 @@
                     <ul class="nav navbar-nav">
                         {{ range .Site.Menus.main }}
                         <li class="{{ if (or ($.IsMenuCurrent `main` .) (eq $.Section (lower .Name))) }}active{{ end }}">
-                          <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+                            <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
                         </li>
                         {{ end }}
                     </ul>
