@@ -4,13 +4,25 @@ hide_body: false
 fields:
 - type: text
   name: title
-  label: title
+  label: Page Title
 - name: gallery
-  type: image_gallery
+  type: field_group
   config: {}
+  fields:
+  - name: title
+    type: text
+    config:
+      required: false
+    label: Title
+    description: "<strong>Optional</strong> title for the gallery. Leave blank on
+      the home page."
+  - name: images
+    type: image_gallery
+    config: {}
+    label: Images
   label: Gallery
-  description: Images on the accommodation page in the gallery
+  description: The image section on a page comes after the content
 pages:
+- content/_index.md
 - content/accommodation.md
 - content/gallery.md
-- content/_index.md
