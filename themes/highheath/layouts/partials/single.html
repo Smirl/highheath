@@ -1,0 +1,100 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 {{if .IsHome }}homepage-content{{ end }}">
+                {{ if and (eq $.Section "comments") (ne $.Params.hide true) }}
+                <h1>{{ .Params.author }}</h1>
+                <h3>{{ .Date.Format "2 January 2006" }}</h3>
+                {{ else }}
+                <h1>{{ .Title }}</h1>
+                {{ end }}
+                <hr>
+                {{ .Content }}
+            </div>
+        </div>
+        {{ with $.Param "gallery" }}
+        <div id="gallery" class="row">
+            <div class="col-sm-12">
+                {{- with .title }}
+                <h2>{{ . }}</h2>
+                {{- end }}
+                <div class="gallery-container">
+                    {{- range  $name := .images }}
+                    {{- $img := resources.Get $name }}
+                    {{- $orientation := 0 }}
+
+                    {{- with $img.Exif }}
+                    {{- if .Tags.Orientation}}
+                    {{- $orientation = .Tags.Orientation }}
+                    {{- end }}
+                    {{- end }}
+
+                    {{- $webp := $img.Resize "x300 webp q80" }}
+                    {{- $jpeg := $img.Resize "x300 jpeg q80" }}
+                    {{- if eq $orientation 6 }}
+                    {{- $webp = $img.Resize "x300 webp q80 r270" }}
+                    {{- $jpeg = $img.Resize "x300 jpeg q80 r270" }}
+                    {{- end }}
+                    <picture>
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $jpeg.RelPermalink }}" alt="{{ $name }}" width="{{ $jpeg.Width }}" height="{{ $jpeg.Height }}">
+                    </picture>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+        {{ with $.Param "prices" }}
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table pure-table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Number of cats</th>
+                            <th>Price per Pen per day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{- range . }}
+                        <tr>
+                            <td>{{ .num }}</td>
+                            <td>{{ .price }}</td>
+                        </tr>
+                        {{- end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ end }}
+        {{ with $.Param "home_button" }}
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <a href="/" role="button" class="btn btn-lg btn-primary btn-block">Back to the home page</a>
+            </div>
+        </div>
+        {{ end }}
+        {{ if and (eq $.Section "comments") (ne $.Params.hide true) }}
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <a onclick="window.history.back()" role="button" class="btn btn-lg btn-primary btn-block">Back</a>
+            </div>
+        </div>
+        {{ end }}
+        {{ if .IsHome }}
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-4 top-spacer">
+                <p>
+                    <small class="text-muted">note: we only board vaccinated cats. unfortunately we cannot board un-neutered toms aged over seven months old.</small>
+                </p>
+                <p class="text-right">
+                    <small class="text-muted">MRS LYN STOKES</small>
+                    <br>
+                    <small class="text-muted">LN/000010188</small>
+                    <br>
+                    <small class="text-muted">Five Star Rated</small>
+                </p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>

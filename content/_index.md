@@ -1,13 +1,15 @@
 ---
-title: High Heath Farm Cattery
+title: Welcome to High Heath Farm Cattery
 linktitle: Home
+gallery:
+  images:
+    - "/uploads/home2.jpg"
+    - "/uploads/img_5117.jpg"
 menu:
   main:
     weight: 1
 
 ---
-### Welcome to High Heath Farm Cattery
-
 I hope you will take a few moments to
 have a look around our website. We understand at High Heath that your cat is
 very much a family member and that it can be stressful for both owner and cat to
@@ -17,5 +19,3 @@ stay. Everything is provided for your cat during their stay but it is nice for
 your cat to have something familiar from home to help them settle.
 
 If you have any questions please feel free to [email or ring us](/contact-us/).
-
-![](/uploads/img_5117.jpg)
