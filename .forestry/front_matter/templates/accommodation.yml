@@ -11,4 +11,6 @@ fields:
   label: Gallery
   description: Images on the accommodation page in the gallery
 pages:
-- content/accommodation/index.md
+- content/accommodation.md
+- content/gallery.md
+- content/_index.md
