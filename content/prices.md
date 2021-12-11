@@ -14,7 +14,7 @@ prices:
 - num: 2022 Price - 2 Cats Sharing
   price: "£19.00"
 - num: 2022 Price - 3 Cats Sharing
-  price: "£23.00"
+  price: "£26.00"
 - num: 2022 Price - 4 Cats Sharing
   price: "£30.00"
 menu:

@@ -40,7 +40,7 @@ opening_times:
   afternoon_close: 4:00pm
   day: Saturday
 - morning_open: 10:00am
-  morning_close: 12:00am
+  morning_close: 12:00pm
   afternoon: false
   afternoon_open: 4:00pm
   afternoon_close: 5:30pm
