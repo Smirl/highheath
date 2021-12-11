@@ -1,7 +1,7 @@
 ---
 title: Accommodation
 gallery:
-  title: Gallery
+  title: Accommodation Gallery
   images:
     - "/uploads/img_4646.jpg"
     - "/uploads/16.jpg"

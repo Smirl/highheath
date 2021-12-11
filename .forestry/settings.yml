@@ -10,8 +10,11 @@ sections:
   path: content/_index.md
   label: Home Page
 - type: document
-  path: content/accommodation/index.md
+  path: content/accommodation.md
   label: Accommodation
+- type: document
+  path: content/gallery.md
+  label: Gallery
 - type: document
   path: content/prices.md
   label: Prices
