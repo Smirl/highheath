@@ -51,7 +51,8 @@ nav .border{
 
 #gallery .gallery-container picture {
 	flex: 1 0 auto;
-	margin: 5px;
+	padding: 5px;
+	max-width: 100%;
 }
 
 #gallery .gallery-container picture img {
