@@ -3,8 +3,11 @@ title: Welcome to High Heath Farm Cattery
 linktitle: Home
 gallery:
   images:
-    - "/uploads/home2.jpg"
-    - "/uploads/img_5117.jpg"
+  - "/uploads/23.jpg"
+  - "/uploads/img_5108-3106.jpg"
+  - "/uploads/img_4985.jpg"
+  - "/uploads/img_6039.jpg"
+  title: ''
 menu:
   main:
     weight: 1
