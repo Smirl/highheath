@@ -21,8 +21,8 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-      - image: "registry.smirlwebs.com/smirl/{{ .Release.Name }}:{{ .Values.version }}"
-        imagePullPolicy: Always
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: {{ .Release.Name }}
         ports:
         - name: http
@@ -48,8 +48,6 @@ spec:
           subPath: private-key.pem
           name: github
           readOnly: true
-      imagePullSecrets:
-      - name: registry.smirlwebs.com
       volumes:
       - name: gmail
         secret:

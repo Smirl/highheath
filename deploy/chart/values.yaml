@@ -1,4 +1,7 @@
-version: latest
+image:
+  repository: ghcr.io/smirl/highheath
+  tag: "v2.0.0"
+  pullPolicy: IfNotPresent
 httpPort: 8080
 hosts:
 - highheath.smirlwebs.com
