@@ -47,13 +47,6 @@ Github Actions are triggered to build and deploy the app on release. Release
 Drafter is used to draft releases based on pull request titles. A service
 account is used to deploy via helm3. This must be created first.
 
-### Cleaning old docker images
-
-A helper to clean docker images from the registry after many tags have been pushed.
-
-`python docker/clean_images.py` for a dry run. Add `--delete` to actually delete
-them.
-
 ### Github Actions Setup
 
 To create the service account and permissions, a cluster-admin needs to apply
@@ -65,7 +58,6 @@ kubectl apply -f deploy/serviceaccount.yaml
 
 [Secrets][github-actions-secrets] for github actions are as follows:
 
-- `DOCKER_PASSWORD`: _The password for registry.smirlwebs.com_
 - `K8S_SECRET`: _The full yaml secret for the serviceaccount_
 - `K8S_URL` : _The url of the kubernetes api server_
 
