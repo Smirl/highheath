@@ -1,0 +1,64 @@
+nameOverride: highheath
+pods:
+  image:
+    name: ghcr.io/smirl/highheath
+    tag: 1.0.0
+  replicas: 1
+  revisionHistoryLimit: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  ports:
+    - containerPort: 8080
+      name: http
+  env:
+    - name: RECAPTCHA_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: secret
+          name: recaptcha
+    - name: TOKEN_FILE
+      value: token.json
+  volumeMounts:
+    - mountPath: /credentials.json
+      name: gmail
+      readOnly: true
+      subPath: credentials.json
+    - mountPath: /token.json
+      name: gmail
+      readOnly: true
+      subPath: token.json
+    - mountPath: /private-key.pem
+      name: github
+      readOnly: true
+      subPath: private-key.pem
+  volumes:
+    - name: gmail
+      secret:
+        secretName: gmail
+    - name: github
+      secret:
+        secretName: github
+
+podDisruptionBudget:
+  enabled: false
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - highheath.smirlwebs.com
+    - highheathcattery.co.uk
+    - www.highheathcattery.co.uk
+  tls:
+    - hosts:
+        - highheath.smirlwebs.com
+        - highheathcattery.co.uk
+        - www.highheathcattery.co.uk
+      secretName: highheath-tls
