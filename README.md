@@ -47,6 +47,10 @@ Github Actions are triggered to build and deploy the app on release. Release
 Drafter is used to draft releases based on pull request titles. A service
 account is used to deploy via helm3. This must be created first.
 
+The helm chart used is a
+[generic-app](https://artifacthub.io/packages/helm/mvisonneau/generic-app)
+chart.
+
 ### Github Actions Setup
 
 To create the service account and permissions, a cluster-admin needs to apply
