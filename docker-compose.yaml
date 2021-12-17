@@ -11,3 +11,4 @@ services:
       - ./private-key.pem:/private-key.pem
     environment:
       TOKEN_FILE: /token.dev.json
+      RECAPTCHA_SECRET: ${RECAPTCHA_SECRET} # from .env
