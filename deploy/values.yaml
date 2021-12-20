@@ -51,14 +51,12 @@ ingress:
     cert-manager.io/acme-challenge-type: http01
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
-    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
   hosts:
-    - highheath.smirlwebs.com
-    - highheathcattery.co.uk
     - www.highheathcattery.co.uk
   tls:
     - hosts:
-        - highheath.smirlwebs.com
         - highheathcattery.co.uk
         - www.highheathcattery.co.uk
       secretName: highheath-tls
