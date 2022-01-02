@@ -1,14 +1,6 @@
 ---
 title: Prices
 prices:
-- num: 1 cat
-  price: "£11.00"
-- num: 2 cats sharing
-  price: "£16.00"
-- num: 3 cats sharing
-  price: "£23.00"
-- num: 4 cats sharing
-  price: "£26.00"
 - num: 2022 Price - 1 Cat
   price: "£14"
 - num: 2022 Price - 2 Cats Sharing
