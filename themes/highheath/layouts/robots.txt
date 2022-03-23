@@ -1,6 +1,6 @@
 User-agent: *
 
-{{range where .Pages "Section" "comments" }}
+{{range where (where .Pages "Section" "comments") "IsSection" false }}
 Disallow: {{.RelPermalink}}
 {{- end}}
 
