@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/matcornic/hermes/v2"
 	"golang.org/x/net/context"
@@ -56,15 +59,48 @@ func getToken() (*oauth2.Config, *oauth2.Token) {
 
 // Request a token from the web, then returns the retrieved token.
 func getTokenFromWeb(config *oauth2.Config) *oauth2.Token {
-	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
-	fmt.Printf("Go to the following link in your browser then type the "+
-		"authorization code: \n%v\n", authURL)
+	// Make a channel to wait for the code to be sent
+	ch := make(chan string)
+	// A random state is needed for security
+	randState := fmt.Sprintf("st%d", time.Now().UnixNano())
+	// Start a local server to listen for the code after redirect
+	// Used to be able to use special redirect UI that just printed the token
+	// this is now removed by google
+	// See https://github.com/googleapis/google-api-go-client/blob/main/examples/main.go
+	ts := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		if req.URL.Path == "/favicon.ico" {
+			http.Error(rw, "", 404)
+			return
+		}
+		if req.FormValue("state") != randState {
+			log.Printf("State doesn't match: req = %#v", req)
+			http.Error(rw, "", 500)
+			return
+		}
+		if code := req.FormValue("code"); code != "" {
+			fmt.Fprintf(rw, "<h1>Success</h1>Authorized.")
+			rw.(http.Flusher).Flush()
+			ch <- code
+			return
+		}
+		log.Printf("no code")
+		http.Error(rw, "", 500)
+	}))
+	defer ts.Close()
 
+	config.RedirectURL = ts.URL
+	authURL := config.AuthCodeURL(randState, oauth2.AccessTypeOffline)
+	fmt.Printf("Go to the following link in your browser: \n%v\n", authURL)
+
+	// Wait for code
 	var authCode string
-	if _, err := fmt.Scan(&authCode); err != nil {
-		log.Fatalf("Unable to read authorization code: %v", err)
+	select {
+	case authCode = <-ch:
+	case <-time.After(time.Minute):
+		log.Fatalf("Timeout waiting for code")
 	}
 
+	// Swap code for a token
 	tok, err := config.Exchange(context.TODO(), authCode)
 	if err != nil {
 		log.Fatalf("Unable to retrieve token from web: %v", err)
