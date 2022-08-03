@@ -9,7 +9,7 @@ require (
 	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/schema v1.2.0
 	github.com/matcornic/hermes/v2 v2.1.0
-	github.com/onsi/gomega v1.19.0
+	github.com/onsi/gomega v1.20.0
 	golang.org/x/net v0.0.0-20220607020251-c690dde0001d
 	golang.org/x/oauth2 v0.0.0-20220524215830-622c5d57e401
 	google.golang.org/api v0.83.0
@@ -26,6 +26,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.4.1 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/go-github/v45 v45.2.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.1.2 // indirect
@@ -52,4 +53,5 @@ require (
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
