@@ -14,7 +14,7 @@ type AppContext struct {
 	Decoder      *schema.Decoder
 	GmailClient  *gmail.Service
 	GithubClient *github.Client
-	Recaptcha    *Recaptcha
+	Recaptcha    Recaptcha
 }
 
 type Handler struct {
