@@ -10,11 +10,15 @@ import (
 
 var RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"
 
-type Recaptcha struct {
+type Recaptcha interface {
+	VerifyToken(token string) (succes bool, err error)
+}
+
+type recaptcha struct {
 	secret string
 }
 
-func (r *Recaptcha) VerifyToken(token string) (success bool, err error) {
+func (r *recaptcha) VerifyToken(token string) (success bool, err error) {
 	values := url.Values{}
 	values.Set("secret", r.secret)
 	values.Set("response", token)
@@ -32,10 +36,10 @@ func (r *Recaptcha) VerifyToken(token string) (success bool, err error) {
 	return response["success"].(bool), nil
 }
 
-func NewRecaptcha() *Recaptcha {
+func NewRecaptcha() Recaptcha {
 	if secret, ok := os.LookupEnv("RECAPTCHA_SECRET"); ok {
 		log.Printf("Recaptcha: %s", secret)
-		return &Recaptcha{secret: secret}
+		return &recaptcha{secret: secret}
 	}
 	log.Fatal("Unable to read RECAPTCHA_SECRET")
 	return nil

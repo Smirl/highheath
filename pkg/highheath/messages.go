@@ -123,6 +123,9 @@ func (contact *Contact) GetEmail() *hermes.Email {
 	}
 }
 
+// Ensure Contact implements EmailableMessage
+var _ EmailableMessage = &Contact{}
+
 type Comment struct {
 	Contact
 	Date time.Time
@@ -149,6 +152,9 @@ func (comment *Comment) GetFileContent() []byte {
 	}
 	return b.Bytes()
 }
+
+// Ensure Comment implements EmailableMessage
+var _ EmailableMessage = &Comment{}
 
 type Booking struct {
 	Pens            int    `name:"Number of pens"`
@@ -217,7 +223,10 @@ func (booking *Booking) GetEmail() *hermes.Email {
 	}
 }
 
-func ValidateForm(r *Recaptcha, email EmailableMessage) error {
+// Ensure Booking implements EmailableMessage
+var _ EmailableMessage = &Booking{}
+
+func ValidateForm(r Recaptcha, email EmailableMessage) error {
 	if email.GetEmailCheck() != "" {
 		return fmt.Errorf("Bot Suspected from email check")
 	}
