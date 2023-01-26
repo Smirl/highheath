@@ -17,7 +17,12 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ^1.19
-          cache: true
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          # Works with v1.50.1, setting to latest to get future issues
+          version: latest
 
       - name: Test
         run: go test -v -covermode=atomic -coverprofile=coverage.out -race ./...
