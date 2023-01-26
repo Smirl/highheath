@@ -3,7 +3,6 @@ package highheath
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -30,7 +29,7 @@ func (e *HighheathTheme) HTMLTemplate() string {
 
 // Retrieve a token, saves the token, then returns the generated client.
 func getToken() (*oauth2.Config, *oauth2.Token) {
-	b, err := ioutil.ReadFile("credentials.json")
+	b, err := os.ReadFile("credentials.json")
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
