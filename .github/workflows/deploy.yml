@@ -1,9 +1,6 @@
 name: Deploy
 
 on:
-  push:
-    tags:
-      - v*
   release:
     types:
       - published
@@ -17,22 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Docker meta
         id: docker_meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ghcr.io/smirl/highheath
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Docker Login
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -40,7 +37,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
@@ -52,12 +49,9 @@ jobs:
       - build
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # DEPLOY
-      - name: Get tag name
-        uses: olegtarasov/get-tag@v2.1
-
       - name: Helm tool installer
         uses: Azure/setup-helm@v1
         with:
@@ -73,4 +67,4 @@ jobs:
         run: helm repo add mvisonneau https://charts.visonneau.fr/
 
       - name: Deploy
-        run: helm upgrade --install highheath mvisonneau/generic-app --version 0.0.11 --namespace highheath -f deploy/values.yaml --set pods.image.tag=$GIT_TAG_NAME
+        run: helm upgrade --install highheath mvisonneau/generic-app --version 0.0.11 --namespace highheath -f deploy/values.yaml --set pods.image.tag=${{ github.event.release.tag_name }}
