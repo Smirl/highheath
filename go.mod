@@ -10,8 +10,8 @@ require (
 	github.com/gorilla/schema v1.2.0
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/onsi/gomega v1.26.0
-	golang.org/x/net v0.5.0
-	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094
+	golang.org/x/net v0.8.0
+	golang.org/x/oauth2 v0.6.0
 	google.golang.org/api v0.94.0
 )
 
@@ -45,8 +45,8 @@ require (
 	github.com/vanng822/go-premailer v0.0.0-20191214114701-be27abe028fe // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20220624142145-8cd45d7dbd1f // indirect
 	google.golang.org/grpc v1.47.0 // indirect
