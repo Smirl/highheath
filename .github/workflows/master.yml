@@ -21,8 +21,9 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          # Works with v1.50.1, setting to latest to get future issues
+          # Works with v1.52.2, setting to latest to get future issues
           version: latest
+          args: --timeout 3m
 
       - name: Test
         run: go test -v -covermode=atomic -coverprofile=coverage.out -race ./...
