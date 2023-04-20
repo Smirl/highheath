@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/google/go-github/v32/github"
+	"github.com/google/go-github/v50/github"
 	"github.com/gorilla/schema"
 	"google.golang.org/api/gmail/v1"
 )
