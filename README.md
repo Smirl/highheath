@@ -106,11 +106,6 @@ kubectl create secret generic recaptcha --from-literal=secret=<SECRET>
 The [recaptcha admin console][recaptcha] can be used to see the number of
 requests and suspicious requests to the forms.
 
-### Forestry.io Setup
-
-Forestry.io is available at https://www.highheathcattery.co.uk/admin as a CMS.
-The configuration is managed via that admin pannel and is found in the `.forestry`
-directory at the root of the repo.
 
 [github-actions-secrets]: https://github.com/Smirl/highheath/settings/secrets
 [gmail-console]: https://console.developers.google.com/apis/dashboard?project=website-form-bac-1595189229489&folder=&organizationId=
