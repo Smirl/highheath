@@ -9,6 +9,15 @@ prices:
   price: "£26.00"
 - num: 2023 Price - 4 Cats Sharing
   price: "£30.00"
+- num: 2024 Price - 1 Cat
+  price: "£15"
+- num: 2024 Price - 2 Cats Sharing
+  price: "£23.00"
+- num: 2024 Price - 3 Cats Sharing
+  price: "£30.00"
+- num: 2024 Price - 4 Cats Sharing
+  price: "£36.00"
+
 menu:
   main:
     weight: 3
