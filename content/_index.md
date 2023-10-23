@@ -1,5 +1,5 @@
 ---
-title: Welcome to High Heath Farm Cattery
+title: High Heath Farm Cattery
 linktitle: Home
 gallery:
   images:

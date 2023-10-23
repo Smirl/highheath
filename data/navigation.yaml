@@ -1,0 +1,33 @@
+header:
+  - name: Home
+    title: Home
+    url: /
+  - name: Accommodation
+    title: Accommodation
+    url: /accommodation/
+  - name: Gallery
+    title: Gallery
+    url: /gallery/
+  - name: Prices
+    title: Prices
+    url: /prices/
+  - name: Reviews
+    title: Reviews
+    url: /comment-us/
+  - name: Contact Us
+    title: Contact Us
+    url: /contact-us/
+  - name: Opening Hours
+    title: Opening Hours
+    url: /contact-us/#opening-times
+  - name: Book Now
+    title: Book Now
+    url: /book-now/
+
+footer:
+  - name: Privacy Policy
+    title: Privacy Policy
+    url: /privacy-policy/
+  - name: Terms & Conditions
+    title: Terms & Conditions
+    url: /terms-conditions/
