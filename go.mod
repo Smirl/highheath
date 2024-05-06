@@ -11,13 +11,12 @@ require (
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/onsi/gomega v1.27.6
 	golang.org/x/net v0.12.0
-	golang.org/x/oauth2 v0.7.0
+	golang.org/x/oauth2 v0.20.0
 	google.golang.org/api v0.119.0
 )
 
 require (
-	cloud.google.com/go/compute v1.19.0 // indirect
-	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/Masterminds/semver v1.4.2 // indirect
 	github.com/Masterminds/sprig v2.16.0+incompatible // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8 // indirect
