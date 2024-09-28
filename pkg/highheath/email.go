@@ -95,7 +95,7 @@ func getTokenFromWeb(config *oauth2.Config) *oauth2.Token {
 	var authCode string
 	select {
 	case authCode = <-ch:
-	case <-time.After(time.Minute):
+	case <-time.After(5 * time.Minute):
 		log.Fatalf("Timeout waiting for code")
 	}
 
