@@ -1,22 +1,22 @@
 ---
 title: Prices
 prices:
-- num: 2023 Price - 1 Cat
-  price: "£14"
-- num: 2023 Price - 2 Cats Sharing
-  price: "£19.00"
-- num: 2023 Price - 3 Cats Sharing
-  price: "£26.00"
-- num: 2023 Price - 4 Cats Sharing
-  price: "£30.00"
 - num: 2024 Price - 1 Cat
   price: "£15"
 - num: 2024 Price - 2 Cats Sharing
-  price: "£23.00"
+  price: "£23"
 - num: 2024 Price - 3 Cats Sharing
-  price: "£30.00"
+  price: "£30"
 - num: 2024 Price - 4 Cats Sharing
-  price: "£36.00"
+  price: "£36"
+- num: 2025 Price - 1 Cat
+  price: "£16"
+- num: 2025 Price - 2 Cats Sharing
+  price: "£25"
+- num: 2025 Price - 3 Cats Sharing
+  price: "£32"
+- num: 2025 Price - 4 Cats Sharing
+  price: "£38"
 
 menu:
   main:
