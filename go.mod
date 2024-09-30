@@ -9,7 +9,7 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/schema v1.4.1
 	github.com/matcornic/hermes/v2 v2.1.0
-	github.com/onsi/gomega v1.27.6
+	github.com/onsi/gomega v1.34.2
 	golang.org/x/net v0.29.0
 	golang.org/x/oauth2 v0.23.0
 	google.golang.org/api v0.199.0
