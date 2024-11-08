@@ -11,7 +11,7 @@ require (
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/onsi/gomega v1.34.2
 	golang.org/x/net v0.29.0
-	golang.org/x/oauth2 v0.23.0
+	golang.org/x/oauth2 v0.24.0
 	google.golang.org/api v0.199.0
 )
 
