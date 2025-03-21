@@ -1,6 +1,7 @@
 module github.com/smirl/highheath
 
 go 1.23
+toolchain go1.24.1
 
 require (
 	github.com/bradleyfalzon/ghinstallation/v2 v2.11.0
@@ -11,7 +12,7 @@ require (
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/onsi/gomega v1.36.2
 	golang.org/x/net v0.33.0
-	golang.org/x/oauth2 v0.23.0
+	golang.org/x/oauth2 v0.28.0
 	google.golang.org/api v0.199.0
 )
 
