@@ -174,7 +174,7 @@ type fakeRecaptcha struct {
 	err     error
 }
 
-func (r *fakeRecaptcha) VerifyToken(token string) (success bool, err error) {
+func (r *fakeRecaptcha) VerifyToken(ctx context.Context, token string) (success bool, err error) {
 	return r.success, r.err
 }
 
@@ -203,7 +203,7 @@ func TestValidateForm(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			g := NewWithT(t)
-			err := ValidateForm(testCase.r, &contact)
+			err := ValidateForm(context.TODO(), testCase.r, &contact)
 			if testCase.expectedErr == "" {
 				g.Expect(err).To(BeNil())
 			} else {
@@ -223,7 +223,7 @@ func TestSendMessages(t *testing.T) {
 	client, err := gmail.NewService(context.Background(), option.WithEndpoint(ts.URL), option.WithAPIKey("abcd"))
 	g.Expect(err).To(BeNil())
 
-	err = SendMessages(client, &contact)
+	err = SendMessages(context.TODO(), client, &contact)
 	g.Expect(err).To(BeNil())
 }
 

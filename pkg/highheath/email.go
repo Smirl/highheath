@@ -132,8 +132,7 @@ func saveToken(path string, token *oauth2.Token) {
 	}
 }
 
-func GmailClient() *gmail.Service {
-	ctx := context.Background()
+func GmailClient(ctx context.Context) *gmail.Service {
 	config, token := getToken()
 	srv, err := gmail.NewService(
 		ctx,

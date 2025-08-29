@@ -8,11 +8,13 @@ import (
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
 	"github.com/google/go-github/v50/github"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 
 func GithubClient() *github.Client {
+	otelTransport := otelhttp.NewTransport(http.DefaultTransport)
 	// Wrap the shared transport for use with the integration ID 1 authenticating with installation ID 99.
-	itr, err := ghinstallation.NewKeyFromFile(http.DefaultTransport, 74377, 10821586, "private-key.pem")
+	itr, err := ghinstallation.NewKeyFromFile(otelTransport, 74377, 10821586, "private-key.pem")
 	if err != nil {
 		log.Fatalf("Failed to create github client: %v", err)
 	}

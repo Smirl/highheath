@@ -2,6 +2,7 @@ package highheath
 
 import (
 	"bytes"
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -226,11 +227,11 @@ func (booking *Booking) GetEmail() *hermes.Email {
 // Ensure Booking implements EmailableMessage
 var _ EmailableMessage = &Booking{}
 
-func ValidateForm(r Recaptcha, email EmailableMessage) error {
+func ValidateForm(ctx context.Context, r Recaptcha, email EmailableMessage) error {
 	if email.GetEmailCheck() != "" {
 		return fmt.Errorf("Bot Suspected from email check")
 	}
-	if ok, err := r.VerifyToken(email.GetToken()); err != nil {
+	if ok, err := r.VerifyToken(ctx, email.GetToken()); err != nil {
 		return err
 	} else if !ok {
 		return fmt.Errorf("Bot Suspected from token")
@@ -238,7 +239,7 @@ func ValidateForm(r Recaptcha, email EmailableMessage) error {
 	return nil
 }
 
-func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
+func SendMessages(ctx context.Context, client *gmail.Service, email EmailableMessage) (err error) {
 	company := "High Heath Farm Cattery"
 	companyEmailAddress := "highheath@googlemail.com"
 	if os.Getenv("TOKEN_FILE") != "token.json" {
@@ -255,14 +256,16 @@ func SendMessages(client *gmail.Service, email EmailableMessage) (err error) {
 	if err != nil {
 		return err
 	}
-	if _, err := client.Users.Messages.Send("me", message).Do(); err != nil {
+	_, err = client.Users.Messages.Send("me", message).Context(ctx).Do()
+	if err != nil {
 		return err
 	}
 	message, err = createMessageFromEmail(name, emailAddress, company, companyEmailAddress, subject, hermesEmail)
 	if err != nil {
 		return err
 	}
-	if _, err := client.Users.Messages.Insert("me", message).Do(); err != nil {
+	_, err = client.Users.Messages.Insert("me", message).Context(ctx).Do()
+	if err != nil {
 		return err
 	}
 	return nil

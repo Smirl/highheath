@@ -10,7 +10,9 @@
             "request": "launch",
             "mode": "auto",
             "env": {
-                "TOKEN_FILE": "${workspaceFolder}/token.dev.json"
+                "TOKEN_FILE": "${workspaceFolder}/token.dev.json",
+                "OTEL_SERVICE_NAME": "highheath",
+                "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4318",
             },
             "envFile": "${workspaceFolder}/.env",
             "program": "${workspaceFolder}/cmd/highheath/main.go",

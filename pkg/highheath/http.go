@@ -3,27 +3,41 @@ package highheath
 import (
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/google/go-github/v50/github"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/schema"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"google.golang.org/api/gmail/v1"
 )
 
 type AppContext struct {
+	ServeMux     *http.ServeMux
 	Decoder      *schema.Decoder
 	GmailClient  *gmail.Service
 	GithubClient *github.Client
 	Recaptcha    Recaptcha
 }
 
-type Handler struct {
-	AppContext AppContext
-	H          func(c AppContext, w http.ResponseWriter, r *http.Request)
+func (c *AppContext) HandleFunc(pattern string, handler func(c AppContext, w http.ResponseWriter, r *http.Request)) {
+	// Create a regular http.HandlerFunc by passing in the AppContext.
+	withoutAppContext := func(w http.ResponseWriter, r *http.Request) {
+		handler(*c, w, r)
+	}
+	// Wrap the handler with OpenTelemetry instrumentation.
+	handlerFunc := otelhttp.WithRouteTag(pattern, http.HandlerFunc(withoutAppContext))
+	// Register the handler with the ServeMux, wrapping it with OpenTelemetry instrumentation.
+	c.ServeMux.Handle(pattern, handlerFunc)
 }
 
-func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	h.H(h.AppContext, w, r)
+func (c *AppContext) WrapHandler() (handler http.Handler) {
+	handler = handlers.CombinedLoggingHandler(os.Stdout, c.ServeMux)
+	handler = handlers.ProxyHeaders(handler)
+	handler = otelhttp.NewHandler(handler, "highheath")
+	handler = handlers.RecoveryHandler()(handler)
+	return handler
 }
 
 func HandleHealth(w http.ResponseWriter, r *http.Request) {
@@ -44,12 +58,12 @@ func HandleContactForm(c AppContext, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := ValidateForm(c.Recaptcha, &form); err != nil {
+	if err := ValidateForm(r.Context(), c.Recaptcha, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/contact-us/failure/")
 		return
 	}
 
-	if err := SendMessages(c.GmailClient, &form); err != nil {
+	if err := SendMessages(r.Context(), c.GmailClient, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/contact-us/failure/")
 		return
 	}
@@ -71,12 +85,12 @@ func HandleBookingForm(c AppContext, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := ValidateForm(c.Recaptcha, &form); err != nil {
+	if err := ValidateForm(r.Context(), c.Recaptcha, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/book-now/failure/")
 		return
 	}
 
-	if err := SendMessages(c.GmailClient, &form); err != nil {
+	if err := SendMessages(r.Context(), c.GmailClient, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/book-now/failure/")
 		return
 	}
@@ -99,7 +113,7 @@ func HandleCommentForm(c AppContext, w http.ResponseWriter, r *http.Request) {
 	}
 	form.Date = time.Now()
 
-	if err := ValidateForm(c.Recaptcha, &form); err != nil {
+	if err := ValidateForm(r.Context(), c.Recaptcha, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/comments/failure/")
 		return
 	}
@@ -110,7 +124,7 @@ func HandleCommentForm(c AppContext, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := SendMessages(c.GmailClient, &form); err != nil {
+	if err := SendMessages(r.Context(), c.GmailClient, &form); err != nil {
 		HandleFormError(w, r, &form, err, "/comments/failure/")
 		return
 	}
