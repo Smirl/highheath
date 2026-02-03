@@ -1,22 +1,14 @@
 ---
 title: Prices
 prices:
-- num: 2024 Price - 1 Cat
-  price: "£15"
-- num: 2024 Price - 2 Cats Sharing
-  price: "£23"
-- num: 2024 Price - 3 Cats Sharing
-  price: "£30"
-- num: 2024 Price - 4 Cats Sharing
-  price: "£36"
-- num: 2025 Price - 1 Cat
-  price: "£16"
-- num: 2025 Price - 2 Cats Sharing
-  price: "£25"
-- num: 2025 Price - 3 Cats Sharing
-  price: "£32"
-- num: 2025 Price - 4 Cats Sharing
-  price: "£38"
+- num: 1 Cat
+  price: "£17"
+- num: 2 Cats Sharing
+  price: "£26"
+- num: 3 Cats Sharing
+  price: "£34"
+- num: 4+ Cats Sharing
+  price: "Please ask for a quote"
 
 menu:
   main:
