@@ -22,7 +22,15 @@ For fast theme development run:
 
 To test forms you will need:
 
-    docker-compose up
+1. First-time setup (see Gmail API Setup and Github API Setup sections below):
+   - Obtain `credentials.json` from Google Cloud Console
+   - Obtain `private-key.pem` from GitHub App settings
+   - Generate `token.dev.json` by running `TOKEN_FILE=token.dev.json go run cmd/highheath/main.go` and completing OAuth flow
+
+2. Start the application:
+   ```bash
+   docker-compose up
+   ```
 
 
 ## Theme layout
@@ -72,9 +80,24 @@ authentication.
 
 For the gmail api, a project [_Website Form Backend_][gmail-console] has been
 created with Oauth2 credentials. `credentials.json` can be downloaded from the
-console. The application should be started where, after authenticating the app,
-a `token.json` will be created. These should not be checked in. A secret in the
-cluster should be created:
+console.
+
+**Initial token setup (required before using docker-compose):**
+
+1. Place `credentials.json` in the project root
+2. Run the app locally to generate the token:
+   ```console
+   TOKEN_FILE=token.dev.json go run cmd/highheath/main.go
+   ```
+3. Follow the authorization URL printed in the console
+4. Complete the OAuth flow in your browser
+5. The token will be saved to `token.dev.json`
+6. Press Ctrl+C to stop the server
+
+After obtaining the token, you can use `docker-compose up` for development.
+These credential files should not be checked in.
+
+For production deployment, a secret in the cluster should be created:
 
 ```console
 kubectl create secret generic gmail -n highheath --from-file=credentials.json --from-file=token.json

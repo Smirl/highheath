@@ -4,7 +4,7 @@ COPY . /src
 RUN hugo --minify --cleanDestinationDir
 
 #build stage
-FROM golang:1.23-alpine AS builder
+FROM golang:1.25-alpine AS builder
 WORKDIR /go/src/app
 COPY . .
 RUN go get -d -v ./...
