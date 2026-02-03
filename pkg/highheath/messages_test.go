@@ -192,7 +192,7 @@ func TestValidateForm(t *testing.T) {
 		{
 			"validation fails due to recapture",
 			&fakeRecaptcha{false, nil},
-			"Bot Suspected from token",
+			"bot suspected from token",
 		},
 		{
 			"validation fails due to recapture error",

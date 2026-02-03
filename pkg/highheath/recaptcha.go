@@ -27,7 +27,7 @@ func (r *recaptcha) VerifyToken(token string) (success bool, err error) {
 		return false, err
 	}
 	var response map[string]interface{}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
 		return false, err
 	}
