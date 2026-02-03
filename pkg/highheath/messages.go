@@ -228,12 +228,12 @@ var _ EmailableMessage = &Booking{}
 
 func ValidateForm(r Recaptcha, email EmailableMessage) error {
 	if email.GetEmailCheck() != "" {
-		return fmt.Errorf("Bot Suspected from email check")
+		return fmt.Errorf("bot suspected from email check")
 	}
 	if ok, err := r.VerifyToken(email.GetToken()); err != nil {
 		return err
 	} else if !ok {
-		return fmt.Errorf("Bot Suspected from token")
+		return fmt.Errorf("bot suspected from token")
 	}
 	return nil
 }
