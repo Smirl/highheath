@@ -10,8 +10,9 @@ import (
 	"strings"
 	"time"
 
+	"context"
+
 	"github.com/matcornic/hermes/v2"
-	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/gmail/v1"
@@ -133,11 +134,10 @@ func saveToken(path string, token *oauth2.Token) {
 }
 
 func GmailClient() *gmail.Service {
-	ctx := context.Background()
 	config, token := getToken()
 	srv, err := gmail.NewService(
-		ctx,
-		option.WithTokenSource(config.TokenSource(ctx, token)),
+		context.Background(),
+		option.WithTokenSource(config.TokenSource(context.Background(), token)),
 	)
 	if err != nil {
 		log.Fatalf("Unable to retrieve Gmail client: %v", err)
