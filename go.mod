@@ -3,14 +3,13 @@ module github.com/smirl/highheath
 go 1.25.0
 
 require (
-	github.com/bradleyfalzon/ghinstallation/v2 v2.18.0
+	github.com/bradleyfalzon/ghinstallation/v2 v2.19.0
 	github.com/go-gomail/gomail v0.0.0-20160411212932-81ebce5c23df
 	github.com/google/go-github/v50 v50.2.0
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/schema v1.4.1
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/onsi/gomega v1.36.2
-	golang.org/x/net v0.54.0
 	golang.org/x/oauth2 v0.36.0
 	google.golang.org/api v0.279.0
 )
@@ -36,7 +35,7 @@ require (
 	github.com/goccy/go-json v0.10.6 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-github/v84 v84.0.0 // indirect
+	github.com/google/go-github/v88 v88.0.0 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -66,6 +65,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.43.0 // indirect
 	go.opentelemetry.io/otel/trace v1.43.0 // indirect
 	golang.org/x/crypto v0.51.0 // indirect
+	golang.org/x/net v0.54.0 // indirect
 	golang.org/x/sys v0.44.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260511170946-3700d4141b60 // indirect
